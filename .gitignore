@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.vite/
+.husky/_/
+.pnpm-store/
+*.log
+.env
+Thumbs.db
