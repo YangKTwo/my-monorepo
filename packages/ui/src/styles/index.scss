@@ -1,0 +1,14 @@
+// 引入 Element Plus 样式
+@use 'element-plus/dist/index.css';
+
+// UI 组件库样式变量
+:root {
+  --ui-border-radius: 8px;
+  --ui-box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  --ui-border-color: #e8ecf1;
+  --ui-border-light: #f0f2f5;
+  --ui-text-color: #303133;
+  --ui-text-secondary: #909399;
+  --ui-background-card: #ffffff;
+  --ui-background-page: #fafafa;
+}
