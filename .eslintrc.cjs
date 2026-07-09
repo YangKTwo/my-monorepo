@@ -29,6 +29,10 @@ module.exports = {
           {
             group: ['element-plus', 'element-plus/*'],
             message: '禁止直接引入 Element Plus，请使用 @my-repo/ui'
+          },
+          {
+            group: ['screen-*'],
+            message: '禁止跨项目直接引用，请将共享代码放在 packages/ 中'
           }
         ]
       }
