@@ -1,0 +1,6 @@
+{
+  "name": "@my-repo/assets",
+  "version": "1.0.0",
+  "description": "共享图片资源（大屏背景、Logo、原型图等）",
+  "type": "module"
+}
