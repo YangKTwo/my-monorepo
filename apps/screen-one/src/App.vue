@@ -1,7 +1,23 @@
+<template>
+  <div class="app-layout" :style="bgStyle">
+    <router-view />
+  </div>
+</template>
+
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+const bgStyle = {
+  // backgroundImage: `url(${bgImage})`,
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  backgroundRepeat: 'no-repeat',
+  backgroundColor: '#0a1628'
+}
 </script>
 
-<template>
-  <HelloWorld />
-</template>
+<style scoped lang="scss">
+.app-layout {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+</style>

@@ -30,7 +30,7 @@
 interface Props {
   title?: string
   extra?: string
-  variant?: 'default' | 'shadow' | 'border' | 'glass'
+  variant?: 'default' | 'shadow' | 'border' | 'glass' | 'dashboard'
   noPadding?: boolean
 }
 
@@ -42,11 +42,20 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .ui-card {
-  background: var(--ui-background-card, #ffffff);
-  border-radius: var(--ui-border-radius, 8px);
+  // ===== 核心：让 Card 能够撑满父容器 =====
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  // ===== 样式变量 =====
+  background: var(--card-bg-color, rgba(0, 52, 98, 0.6));
+  border: 1px solid var(--card-border-color, rgba(20, 203, 240, 0.2));
+  border-radius: var(--card-border-radius, 4px);
   overflow: hidden;
   transition: box-shadow 0.3s ease;
 
+  // ===== 变体 =====
   &.shadow {
     box-shadow: var(--ui-box-shadow, 0 2px 12px rgba(0, 0, 0, 0.08));
   }
@@ -65,7 +74,9 @@ withDefaults(defineProps<Props>(), {
     padding: 0;
   }
 
+  // ===== 头部 =====
   &__header {
+    flex-shrink: 0; // 头部不压缩
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,12 +107,18 @@ withDefaults(defineProps<Props>(), {
     color: var(--ui-text-secondary, #909399);
   }
 
+  // ===== 主体（自动撑满剩余空间） =====
   &__body {
+    flex: 1; // ← 关键：撑满剩余高度
     padding: 20px;
     color: var(--ui-text-color, #303133);
+    display: flex;
+    flex-direction: column;
   }
 
+  // ===== 底部 =====
   &__footer {
+    flex-shrink: 0; // 底部不压缩
     padding: 12px 20px;
     border-top: 1px solid var(--ui-border-light, #f0f2f5);
     background: var(--ui-background-page, #fafafa);

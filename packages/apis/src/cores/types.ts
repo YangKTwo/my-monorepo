@@ -2,8 +2,10 @@
  * 核心类型定义
  */
 
+import { AxiosRequestConfig } from 'axios'
+
 // 基础响应结构
-export interface BaseResponse<T = any> {
+export interface BaseResponse<T = unknown> {
   code: number
   msg: string
   data: T
@@ -11,7 +13,7 @@ export interface BaseResponse<T = any> {
 }
 
 // 分页响应结构
-export interface PageResponse<T = any> {
+export interface PageResponse<T = unknown> {
   list: T[]
   total: number
   pageNum: number
@@ -27,7 +29,7 @@ export interface PageParams {
 }
 
 // 请求配置扩展
-export interface RequestConfig {
+export interface RequestConfig extends AxiosRequestConfig {
   showLoading?: boolean
   showError?: boolean
   retry?: number

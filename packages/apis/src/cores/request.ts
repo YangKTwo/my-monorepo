@@ -94,32 +94,32 @@ class HttpClient {
     )
   }
 
-  async request<T = any>(config: RequestConfig): Promise<T> {
+  async request<T = unknown>(config: RequestConfig): Promise<T> {
     try {
       const response = await this.instance.request<T>(config)
-      return response
+      return response.data
     } catch (error) {
-      throw errorHandler(error)
+      throw errorHandler(error as AxiosError)
     }
   }
 
-  get<T = any>(url: string, config?: RequestConfig): Promise<T> {
+  get<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'GET', url })
   }
 
-  post<T = any>(url: string, data?: any, config?: RequestConfig): Promise<T> {
+  post<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'POST', url, data })
   }
 
-  put<T = any>(url: string, data?: any, config?: RequestConfig): Promise<T> {
+  put<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'PUT', url, data })
   }
 
-  delete<T = any>(url: string, config?: RequestConfig): Promise<T> {
+  delete<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE', url })
   }
 
-  patch<T = any>(url: string, data?: any, config?: RequestConfig): Promise<T> {
+  patch<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH', url, data })
   }
 }
