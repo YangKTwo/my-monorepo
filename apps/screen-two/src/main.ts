@@ -1,4 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import '@my-repo/ui'
-createApp(App).mount('#app')
+import './styles/global.scss'
+import router from './router'
+
+createApp(App).use(router).mount('#app')

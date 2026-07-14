@@ -308,6 +308,9 @@ importers:
       '@my-repo/apis':
         specifier: workspace:*
         version: link:../../packages/apis
+      '@my-repo/business':
+        specifier: workspace:*
+        version: link:../../packages/business
       '@my-repo/hooks':
         specifier: workspace:*
         version: link:../../packages/hooks
@@ -358,6 +361,15 @@ importers:
       '@my-repo/apis':
         specifier: workspace:*
         version: link:../..
+
+  packages/business:
+    devDependencies:
+      '@my-repo/ui':
+        specifier: workspace:*
+        version: link:../ui
+      vue:
+        specifier: ^3.4.0
+        version: 3.5.39(typescript@6.0.3)
 
   packages/hooks:
     dependencies:

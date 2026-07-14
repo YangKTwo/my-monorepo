@@ -1,0 +1,15 @@
+{
+  "name": "@my-repo/business",
+  "version": "1.0.0",
+  "description": "业务组件库（跨项目复用）",
+  "main": "src/index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "vue": "^3.4.0",
+    "@my-repo/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "vue": "^3.4.0",
+    "@my-repo/ui": "workspace:*"
+  }
+}
