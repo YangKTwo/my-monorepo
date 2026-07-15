@@ -16,7 +16,8 @@
     "@my-repo/ui": "workspace:*",
     "@my-repo/apis": "workspace:*",
     "@my-repo/hooks": "workspace:*",
-    "@my-repo/business": "workspace:*"
+    "@my-repo/business": "workspace:*",
+    "@my-repo/theme": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",

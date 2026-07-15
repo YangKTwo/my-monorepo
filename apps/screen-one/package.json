@@ -13,7 +13,8 @@
     "vue-router": "^5.1.0",
     "element-plus": "^2.14.2",
     "echarts": "^6.1.0",
-    "@my-repo/ui": "workspace:*"
+    "@my-repo/ui": "workspace:*",
+    "@my-repo/theme": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",
