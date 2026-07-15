@@ -19,7 +19,7 @@
       <UiButton
         type="primary"
         size="large"
-        :loading="loading.login.value"
+        :loading="userStore.loginLoading"
         style="width: 100%"
         @click="handleSubmit"
       >
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { UiForm, UiButton, type FormConfig, type FormExpose, type FormRules } from '@my-repo/ui'
-import { useUser } from '@my-repo/hooks'
+import { useUserStore } from '@my-repo/stores'
 import type { UserInfo } from '@my-repo/apis'
 
 interface Props {
@@ -50,7 +50,7 @@ const emit = defineEmits<{
   error: [error: Error]
 }>()
 
-const { login, loading } = useUser()
+const userStore = useUserStore()
 
 const formRef = ref<FormExpose>()
 const form = reactive({
@@ -85,7 +85,7 @@ const handleSubmit = async () => {
   if (!valid) return
 
   try {
-    const userInfo = await login({
+    const userInfo = await userStore.login({
       userName: String(form.userName),
       userPwd: String(form.password)
     })

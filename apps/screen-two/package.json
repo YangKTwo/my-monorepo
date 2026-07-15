@@ -9,15 +9,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.5.39",
-    "vue-router": "^5.1.0",
-    "element-plus": "^2.14.2",
-    "echarts": "^6.1.0",
-    "@my-repo/ui": "workspace:*",
     "@my-repo/apis": "workspace:*",
-    "@my-repo/hooks": "workspace:*",
     "@my-repo/business": "workspace:*",
-    "@my-repo/theme": "workspace:*"
+    "@my-repo/hooks": "workspace:*",
+    "@my-repo/theme": "workspace:*",
+    "@my-repo/ui": "workspace:*",
+    "@my-repo/stores": "workspace:*",
+    "echarts": "^6.1.0",
+    "element-plus": "^2.14.2",
+    "pinia": "^3.0.4",
+    "vue": "^3.5.39",
+    "vue-router": "^5.1.0"
   },
   "devDependencies": {
     "@types/node": "^24.13.2",

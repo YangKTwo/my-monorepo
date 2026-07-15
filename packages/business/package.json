@@ -12,13 +12,17 @@
     "@my-repo/ui": "workspace:*",
     "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
-    "element-plus": "^2.7.0"
+    "element-plus": "^2.7.0",
+    "@my-repo/stores": "workspace:*",
+    "pinia": "^3.0.0"
   },
   "devDependencies": {
     "vue": "^3.4.0",
     "@my-repo/ui": "workspace:*",
     "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
-    "element-plus": "^2.7.0"
+    "element-plus": "^2.7.0",
+    "@my-repo/stores": "workspace:*",
+    "pinia": "^3.0.0"
   }
 }
