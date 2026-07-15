@@ -1,2 +1,5 @@
 export * from './types'
 export { userApi } from './api'
+export { encryptPassword } from './crypto'
+export { setupApiConfig } from '../../cores/config'
+export type { ApiConfig } from '../../cores/config'

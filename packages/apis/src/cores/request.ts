@@ -5,6 +5,9 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 import type { BaseResponse, RequestConfig, BusinessError } from './types'
 import { errorHandler } from './error-handler'
+import { getApiConfig, TOKEN_KEY } from './config'
+
+const NO_TOKEN_URLS = ['/user/login/auth']
 
 class HttpClient {
   private instance: AxiosInstance
@@ -18,109 +21,60 @@ class HttpClient {
         'Content-Type': 'application/json'
       }
     })
-
     this.setupInterceptors()
   }
 
   private setupInterceptors(): void {
     // 请求拦截器
-    this.instance.interceptors.request.use(
-      (config) => {
-        // 添加 Token
-        const token = localStorage.getItem('access_token')
+    this.instance.interceptors.request.use((config) => {
+      const { loginSource } = getApiConfig()
+
+      //所有请求都带 Login-Source
+      config.headers['Login-Source'] = loginSource
+
+      // 非登录接口带 Finance-Token
+      const url = config.url ?? ''
+      const needToken = !NO_TOKEN_URLS.some((path) => url.includes(path))
+      if (needToken) {
+        const token = localStorage.getItem(TOKEN_KEY())
         if (token) {
-          config.headers.Authorization = `Bearer ${token}`
+          config.headers['Finance-Token'] = token
         }
-
-        // 添加租户ID
-        const tenantId = localStorage.getItem('tenant_id')
-        if (tenantId) {
-          config.headers['X-Tenant-Id'] = tenantId
-        }
-
-        // 开发环境打印请求日志
-        if (import.meta.env.DEV) {
-          console.log('[API Request]', {
-            url: config.url,
-            method: config.method,
-            params: config.params,
-            data: config.data
-          })
-        }
-
-        return config
-      },
-      (error) => {
-        return Promise.reject(error)
       }
-    )
+      return config
+    })
 
     // 响应拦截器
     this.instance.interceptors.response.use(
       (response: AxiosResponse<BaseResponse>) => {
-        // 开发环境打印响应日志
-        if (import.meta.env.DEV) {
-          console.log('[API Response]', {
-            url: response.config.url,
-            data: response.data
-          })
-        }
-
         const { code, msg, data } = response.data
 
         // 处理业务状态码
         if (code !== 0 && code !== 200) {
           // Token 过期
           if (code === 401) {
-            window.location.href = '/login'
+            localStorage.removeItem(TOKEN_KEY())
           }
-          // 权限不足
-          if (code === 403) {
-            console.warn('权限不足')
-          }
-
-          return Promise.reject({
-            code,
-            message: msg || '请求失败',
-            data
-          } as BusinessError)
+          return Promise.reject({ code, message: msg || '请求失败', data } as BusinessError)
         }
 
-        return data
+        //拦截器直接解包data
+        return data as unknown as AxiosResponse
       },
-      (error: AxiosError) => {
-        return Promise.reject(errorHandler(error))
-      }
+      (error: AxiosError) => Promise.reject(errorHandler(error))
     )
   }
 
   async request<T = unknown>(config: RequestConfig): Promise<T> {
-    try {
-      const response = await this.instance.request<T>(config)
-      return response.data
-    } catch (error) {
-      throw errorHandler(error as AxiosError)
-    }
+    return this.instance.request<T, T>(config)
   }
 
   get<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'GET', url })
   }
 
-  post<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
+  post<T = unknown>(url: string, data?: unknown, config?: RequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'POST', url, data })
-  }
-
-  put<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
-    return this.request<T>({ ...config, method: 'PUT', url, data })
-  }
-
-  delete<T = unknown>(url: string, config?: RequestConfig): Promise<T> {
-    return this.request<T>({ ...config, method: 'DELETE', url })
-  }
-
-  patch<T = unknown>(url: string, data?: any, config?: RequestConfig): Promise<T> {
-    return this.request<T>({ ...config, method: 'PATCH', url, data })
   }
 }
 

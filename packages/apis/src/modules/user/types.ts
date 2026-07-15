@@ -1,55 +1,47 @@
 /**
- * 用户模块类型定义
+ * 登录请求参数
  */
-
-// 用户信息
-export interface UserInfo {
-  id: string
-  username: string
-  nickname: string
-  email: string
-  phone: string
-  avatar: string
-  role: string
-  status: 'active' | 'inactive' | 'locked'
-  createTime: string
-  updateTime: string
-}
-
-// 登录参数
 export interface LoginParams {
-  username: string
-  password: string
-  remember?: boolean
+  userName: string
+  userPwd: string
 }
 
-// 登录响应
-export interface LoginResponse {
+/**
+ * 登录接口返回数据
+ */
+export interface UserRespVo {
+  authorization: string
+  employeeStatus: 0 | 1 // 0离职 1在职
+  loginStatus: boolean
+  nickName: string
   token: string
-  refreshToken: string
-  expiresIn: number
-  userInfo: UserInfo
+  tokenActiveTimeout: number // 活跃超时剩余秒数
+  tokenTimeout: number // 总有效期剩余秒数
+  userId: string
+  userName: string
+  userType: number
 }
 
-// 用户查询参数
-export interface UserQueryParams {
-  username?: string
-  nickname?: string
-  status?: string
-  pageNum?: number
-  pageSize?: number
+/**
+ * getAuthInfo
+ */
+export interface UserInfo {
+  autohrization: string
+  employeeStatus: 0 | 1
+  loginStatus: boolean
+  nickName: string
+  oldUserId: number
+  rolePermission: string // 权限 key 列表（字符串，需自行 parse）
+  roleRank: 0 | 1 | 2 // 0超管 1普管 2普通用户
+  token: string // 续签后会更新
+  tokenActiveTimeout: number
+  tokenTimeout: number
+  userId: number
+  userName: string
+  userType: -1 | 0 | 1 // -1未登录 0普通 1管理员
 }
 
-// 更新用户参数
-export interface UpdateUserParams {
-  nickname?: string
-  email?: string
-  phone?: string
-  avatar?: string
-}
-
-// 重置密码参数
-export interface ResetPasswordParams {
-  oldPassword: string
-  newPassword: string
+export interface LoginFormData {
+  userName: string
+  password: string
 }
