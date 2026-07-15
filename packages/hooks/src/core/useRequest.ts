@@ -1,30 +1,19 @@
-import { ref, type Ref } from 'vue'
-
-// ========== 类型定义 ==========
+import { ref, shallowRef, type Ref } from 'vue'
 
 /** useRequest 配置选项 */
 export interface UseRequestOptions<T> {
-  /** 是否自动执行 */
   immediate?: boolean
-  /** 默认数据 */
   defaultData?: T
-  /** 成功回调 */
   onSuccess?: (data: T) => void
-  /** 失败回调 */
   onError?: (error: Error) => void
 }
 
 /** useRequest 返回值 */
-export interface UseRequestReturn<T> {
-  /** 数据 */
+export interface UseRequestReturn<T, A extends unknown[] = []> {
   data: Ref<T | null>
-  /** 加载状态 */
   loading: Ref<boolean>
-  /** 错误信息 */
   error: Ref<Error | null>
-  /** 执行请求 */
-  run: (...args: unknown[]) => Promise<T>
-  /** 重置状态 */
+  run: (...args: A) => Promise<T>
   reset: () => void
 }
 
@@ -32,17 +21,17 @@ export interface UseRequestReturn<T> {
  * 通用请求 Hook
  * 封装 loading、error、data 状态管理
  */
-export function useRequest<T = unknown>(
-  api: (...args: unknown[]) => Promise<T>,
+export function useRequest<T = unknown, A extends unknown[] = []>(
+  api: (...args: A) => Promise<T>,
   options: UseRequestOptions<T> = {}
-): UseRequestReturn<T> {
+): UseRequestReturn<T, A> {
   const { immediate = false, defaultData = null, onSuccess, onError } = options
 
-  const data = ref<T | null>(defaultData as T | null)
+  const data = shallowRef<T | null>(defaultData as T | null)
   const loading = ref(false)
   const error = ref<Error | null>(null)
 
-  const execute = async (...args: unknown[]): Promise<T> => {
+  const execute = async (...args: A): Promise<T> => {
     loading.value = true
     error.value = null
     try {
@@ -67,7 +56,7 @@ export function useRequest<T = unknown>(
   }
 
   if (immediate) {
-    execute()
+    execute(...([] as unknown as A))
   }
 
   return {
