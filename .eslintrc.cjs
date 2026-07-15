@@ -45,5 +45,19 @@ module.exports = {
     // 通用
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'prefer-const': 'error'
+  },
+  overrides: [
+  {
+    files: ['packages/ui/**/*.{vue,ts,js}'],
+    rules: {
+      'no-restricted-imports': 'off'
+    }
+  },
+  {
+    files: ['apps/*/src/main.ts'],
+    rules: {
+      'no-restricted-imports': 'off'
+    }
   }
+]
 }
