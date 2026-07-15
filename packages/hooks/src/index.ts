@@ -11,3 +11,5 @@ export type { UseTableOptions, UseTableReturn } from './modules/useTable'
 
 export { useStatistics } from './modules/useStatistics'
 export type { StatisticsData, UseStatisticsReturn } from './modules/useStatistics'
+
+export { tokenStorage } from './core/token'

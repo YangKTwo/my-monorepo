@@ -5,7 +5,7 @@ export { default as UiTable } from './components/Table/index.vue'
 export { default as UiButton } from './components/Button/index.vue'
 export { default as UiInput } from './components/Input/index.vue'
 export { default as Chart } from './components/Chart/index.vue'
-
+export { UiMessage } from './message'
 // ============ 类型导出（自有类型，不 re-export element-plus）============
 export type { CardProps } from './components/Card/types'
 export type {

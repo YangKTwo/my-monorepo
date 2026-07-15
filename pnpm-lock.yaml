@@ -206,25 +206,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@element-plus/icons-vue':
-        specifier: ^2.3.2
-        version: 2.3.2(vue@3.5.39(typescript@6.0.3))
-      axios:
-        specifier: ^1.18.1
-        version: 1.18.1
-      dayjs:
-        specifier: ^1.11.21
-        version: 1.11.21
-      echarts:
-        specifier: ^6.1.0
-        version: 6.1.0
-      element-plus:
-        specifier: ^2.14.2
-        version: 2.14.3(vue@3.5.39(typescript@6.0.3))
-      vue-router:
-        specifier: ^5.1.0
-        version: 5.1.0(@vue/compiler-sfc@3.5.39)(rolldown@1.1.5)(rollup@3.30.0)(vite@8.1.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
     devDependencies:
       '@commitlint/cli':
         specifier: ^21.2.0
@@ -280,9 +261,18 @@ importers:
       '@my-repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      echarts:
+        specifier: ^6.1.0
+        version: 6.1.0
+      element-plus:
+        specifier: ^2.14.2
+        version: 2.14.3(vue@3.5.39(typescript@6.0.3))
       vue:
         specifier: ^3.5.39
         version: 3.5.39(typescript@6.0.3)
+      vue-router:
+        specifier: ^5.1.0
+        version: 5.1.0(@vue/compiler-sfc@3.5.39)(rolldown@1.1.5)(rollup@3.30.0)(vite@8.1.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
     devDependencies:
       '@types/node':
         specifier: ^24.13.2
@@ -317,9 +307,18 @@ importers:
       '@my-repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
+      echarts:
+        specifier: ^6.1.0
+        version: 6.1.0
+      element-plus:
+        specifier: ^2.14.2
+        version: 2.14.3(vue@3.5.39(typescript@6.0.3))
       vue:
         specifier: ^3.5.39
         version: 3.5.39(typescript@6.0.3)
+      vue-router:
+        specifier: ^5.1.0
+        version: 5.1.0(@vue/compiler-sfc@3.5.39)(rolldown@1.1.5)(rollup@3.30.0)(vite@8.1.4(@types/node@24.13.3)(jiti@2.6.1)(sass@1.101.0)(yaml@2.9.0))(vue@3.5.39(typescript@6.0.3))
     devDependencies:
       '@types/node':
         specifier: ^24.13.2
