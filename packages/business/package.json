@@ -9,6 +9,7 @@
   },
   "peerDependencies": {
     "vue": "^3.4.0",
+    "vue-router": "^5.1.0",
     "@my-repo/ui": "workspace:*",
     "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
@@ -18,6 +19,7 @@
   },
   "devDependencies": {
     "vue": "^3.4.0",
+    "vue-router": "^5.1.0",
     "@my-repo/ui": "workspace:*",
     "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
