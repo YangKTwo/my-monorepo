@@ -384,12 +384,18 @@ importers:
       '@my-repo/hooks':
         specifier: workspace:*
         version: link:../hooks
+      '@my-repo/stores':
+        specifier: workspace:*
+        version: link:../stores
       '@my-repo/ui':
         specifier: workspace:*
         version: link:../ui
       element-plus:
         specifier: ^2.7.0
         version: 2.14.3(vue@3.5.39(typescript@6.0.3))
+      pinia:
+        specifier: ^3.0.0
+        version: 3.0.4(typescript@6.0.3)(vue@3.5.39(typescript@6.0.3))
       vue:
         specifier: ^3.4.0
         version: 3.5.39(typescript@6.0.3)

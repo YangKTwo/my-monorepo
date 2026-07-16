@@ -85,7 +85,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import type { FormInstance } from 'element-plus'
 import type { FormActionText, FormConfig, FormData, FormExpose, FormRules } from './types'
 
@@ -102,7 +102,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  data: () => ({}),
   rules: () => ({}),
   labelWidth: 100,
   inline: false,
@@ -117,15 +116,8 @@ const emit = defineEmits<{
 }>()
 
 const formRef = ref<FormInstance>()
-const formData = reactive<FormData>({ ...props.data })
-
-watch(
-  () => props.data,
-  (newData) => {
-    if (newData) Object.assign(formData, newData)
-  },
-  { deep: true }
-)
+const localData = reactive<FormData>({})
+const formData = computed(() => props.data ?? localData)
 
 /** 外层 rules + 字段 config.rules 合并 */
 const mergedRules = computed(() => {
@@ -149,7 +141,7 @@ const mergedRules = computed(() => {
 const handleSubmit = async () => {
   const ok = await validate()
   if (!ok) return
-  emit('submit', { ...formData })
+  emit('submit', { ...formData.value })
 }
 
 const handleReset = () => {
@@ -169,9 +161,9 @@ const validate = async (): Promise<boolean> => {
 
 const resetFields = () => formRef.value?.resetFields()
 
-const setFieldsValue = (data: FormData) => Object.assign(formData, data)
+const setFieldsValue = (data: FormData) => Object.assign(formData.value, data)
 
-const getFieldsValue = (): FormData => ({ ...formData })
+const getFieldsValue = (): FormData => ({ ...formData.value })
 
 defineExpose<FormExpose>({
   validate,

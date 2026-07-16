@@ -90,8 +90,8 @@ const handleSubmit = async () => {
       userPwd: String(form.password)
     })
     emit('success', userInfo)
-  } catch (e) {
-    emit('error', e instanceof Error ? e : new Error(String(e)))
+  } catch (e: any) {
+    emit('error', new Error(e?.message || '登录失败'))
   }
 }
 </script>

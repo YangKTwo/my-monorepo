@@ -1,6 +1,7 @@
 export interface ApiConfig {
   loginSource: string
   tokenKey?: string
+  onUnauthorized?: () => void
 }
 
 let apiConfig: ApiConfig = {

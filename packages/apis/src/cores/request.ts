@@ -54,6 +54,7 @@ class HttpClient {
           // Token 过期
           if (code === 401) {
             localStorage.removeItem(TOKEN_KEY())
+            getApiConfig().onUnauthorized?.()
           }
           return Promise.reject({ code, message: msg || '请求失败', data } as BusinessError)
         }

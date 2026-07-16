@@ -34,8 +34,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Chart } from '@my-repo/ui'
-import type { EChartsOption } from 'echarts'
+import { Chart, type ChartOption } from '@my-repo/ui'
 
 // ========== Props ==========
 interface FundData {
@@ -59,7 +58,7 @@ const legendData = [
 ]
 
 // ========== ECharts 配置 ==========
-const chartOption = computed<EChartsOption>(() => ({
+const chartOption = computed<ChartOption>(() => ({
   tooltip: {
     trigger: 'axis',
     backgroundColor: 'rgba(10, 22, 40, 0.8)',
