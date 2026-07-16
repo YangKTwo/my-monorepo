@@ -211,7 +211,7 @@ const chartOption = computed<ChartOption>(() => ({
   &__title {
     font-size: 15px;
     font-weight: 600;
-    color: var(--ui-text-color, #fff);
+    color: var(--text-color, #fff);
     margin-bottom: 10px;
   }
 
@@ -223,11 +223,11 @@ const chartOption = computed<ChartOption>(() => ({
 
     .stat-item {
       font-size: 13px;
-      color: var(--ui-text-secondary, rgba(255, 255, 255, 0.5));
+      color: var(--text-secondary, rgba(255, 255, 255, 0.5));
 
       em {
         font-style: normal;
-        color: var(--ui-text-color, #fff);
+        color: var(--text-color, #fff);
         font-weight: 500;
         margin-left: 2px;
       }
@@ -245,7 +245,7 @@ const chartOption = computed<ChartOption>(() => ({
       align-items: center;
       gap: 6px;
       font-size: 12px;
-      color: var(--ui-text-secondary, rgba(255, 255, 255, 0.5));
+      color: var(--text-secondary, rgba(255, 255, 255, 0.5));
 
       .dot {
         width: 16px;

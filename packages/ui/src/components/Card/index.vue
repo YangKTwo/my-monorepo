@@ -42,86 +42,39 @@ withDefaults(defineProps<Props>(), {
 
 <style scoped lang="scss">
 .ui-card {
-  // ===== 核心：让 Card 能够撑满父容器 =====
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-
-  // ===== 样式变量 =====
-  background: var(--card-bg-color, rgba(0, 52, 98, 0.6));
-  border: 1px solid var(--card-border-color, rgba(20, 203, 240, 0.2));
-  border-radius: var(--card-border-radius, 4px);
+  box-sizing: border-box;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
 
-  // ===== 变体 =====
-  &.shadow {
-    box-shadow: var(--ui-box-shadow, 0 2px 12px rgba(0, 0, 0, 0.08));
-  }
+  // 普通卡片用另一套变量，避免和大屏抢同一套色
+  background: var(--card-bg-color-default, #fff);
+  border: 1px solid var(--card-border-color-default, #e5e7eb);
+  border-radius: var(--card-border-radius, 4px);
 
-  &.border {
-    border: 1px solid var(--ui-border-color, #e8ecf1);
-  }
+  &.dashboard {
+    background: var(--card-bg-color, rgba(0, 52, 98, 0.6));
+    border: 1px solid var(--card-border-color, rgba(20, 203, 240, 0.2));
+    border-radius: var(--card-border-radius, 4px);
+    box-shadow: var(--card-inset-shadow, inset 0 0 10px 0 rgba(20, 203, 240, 0.4));
+    // 不要 backdrop-filter，原型没有
 
-  &.glass {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  &.no-padding .ui-card__body {
-    padding: 0;
-  }
-
-  // ===== 头部 =====
-  &__header {
-    flex-shrink: 0; // 头部不压缩
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--ui-border-light, #f0f2f5);
-
-    &-left {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .ui-card__header {
+      border-bottom-color: var(--card-header-border, rgba(20, 203, 240, 0.15));
+      background: transparent;
     }
 
-    &-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .ui-card__title,
+    .ui-card__body {
+      color: var(--text-color, #e5eaf0);
     }
-  }
 
-  &__title {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ui-text-color, #303133);
-  }
-
-  &__extra {
-    font-size: 13px;
-    color: var(--ui-text-secondary, #909399);
-  }
-
-  // ===== 主体（自动撑满剩余空间） =====
-  &__body {
-    flex: 1; // ← 关键：撑满剩余高度
-    padding: 20px;
-    color: var(--ui-text-color, #303133);
-    display: flex;
-    flex-direction: column;
-  }
-
-  // ===== 底部 =====
-  &__footer {
-    flex-shrink: 0; // 底部不压缩
-    padding: 12px 20px;
-    border-top: 1px solid var(--ui-border-light, #f0f2f5);
-    background: var(--ui-background-page, #fafafa);
+    .ui-card__footer {
+      border-top-color: var(--card-header-border, rgba(20, 203, 240, 0.15));
+      background: transparent; // 避免底部一块实色
+    }
   }
 }
 </style>

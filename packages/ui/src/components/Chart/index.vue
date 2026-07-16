@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
     align-items: center;
     justify-content: center;
     background: rgba(255, 255, 255, 0.5);
-    color: var(--ui-text-secondary, #909399);
+    color: var(--text-secondary, #909399);
     font-size: 14px;
     z-index: 10;
   }
