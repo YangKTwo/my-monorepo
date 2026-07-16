@@ -12,9 +12,15 @@ const router = createRouter({
     },
     {
       path: '/',
-      name: 'Dashboard',
-      component: () => import('../views/Dashboard.vue'),
-      meta: { requiresAuth: true }
+      component: () => import('../layouts/MainLayout.vue'),
+      meta: { requiresAuth: true },
+      children: [
+        {
+          path: '',
+          name: 'Dashboard',
+          component: () => import('../views/Dashboard.vue')
+        }
+      ]
     }
   ]
 })

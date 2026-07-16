@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import bgImage from '@my-repo/ui/src/assets/src/images/bg_brown.png'
+import bgImage from '@my-repo/ui/src/assets/src/images/bg_blue.png'
 import { onMounted } from 'vue'
 import { tokenStorage } from '@my-repo/hooks'
 import { useUserStore } from '@my-repo/stores'
