@@ -4,7 +4,10 @@
   --text-color: #e5eaf0;
   --text-secondary: rgba(255, 255, 255, 0.6);
 
-  /* 顶栏导航 */
+  --font-family: 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-family-number: var(--font-family);
+
+  /* 顶栏 */
   --nav-item-width: 72px;
   --nav-item-height: 40px;
   --nav-item-gap: 20px;
@@ -12,19 +15,36 @@
   --nav-active-color: #14cbf0;
   --nav-active-glow: rgba(20, 203, 240, 0.8);
 
-  /* 顶栏工具 */
   --toolbar-btn-size: 24px;
   --toolbar-btn-radius: 2px;
   --toolbar-gap: 20px;
 
-  /* 顶栏整体 */
   --screen-header-height: 70px;
   --screen-header-padding-x: 20px;
 
-  /* Card 等… */
+  /* Card */
   --card-bg-color: rgba(0, 52, 98, 0.6);
   --card-border-color: rgba(20, 203, 240, 0.2);
   --card-border-radius: 4px;
   --card-inset-shadow: inset 0 0 10px 0 rgba(20, 203, 240, 0.4);
   --card-header-border: rgba(20, 203, 240, 0.15);
+
+  /* 栅栏：尺寸 */
+  --side-nav-height: 800px;
+  --side-nav-gap: 6px;
+  --side-nav-item-min-width: 32px;
+  --side-nav-item-padding: 8px;
+  --side-nav-item-radius: 4px;
+  --side-nav-badge-size: 32px;
+  --side-nav-icon-size: 22px;
+  --side-nav-char-size: 16px;
+  --side-nav-char-gap: 4px;
+
+  /* 栅栏：皮肤（换 app 主要改这里） */
+  --side-nav-item-active-bg: rgba(0, 52, 98, 0.6);
+  --side-nav-item-active-border: rgba(20, 203, 240, 0.6);
+  --side-nav-item-active-shadow: inset 0 0 4px 0 #14cbf0;
+  --side-nav-label-gradient: linear-gradient(180deg, #ffffff99 0%, #14cbf099 100%);
+  --side-nav-label-gradient-active: linear-gradient(180deg, #ffffff 0%, #14cbf0 100%);
+  --side-nav-label-glow: drop-shadow(0 0 4px rgba(20, 203, 240, 0.6));
 }

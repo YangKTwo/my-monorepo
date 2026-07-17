@@ -76,5 +76,39 @@ withDefaults(defineProps<Props>(), {
       background: transparent; // 避免底部一块实色
     }
   }
+
+  &.no-padding .ui-card__body {
+    padding: 0;
+  }
+  &__header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--card-header-border, #f0f2f5);
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color, #303133);
+  }
+  &__extra {
+    font-size: 13px;
+    color: var(--text-secondary, #909399);
+  }
+  &__body {
+    flex: 1;
+    min-height: 0;
+    padding: 20px;
+    color: var(--text-color, #303133);
+    display: flex;
+    flex-direction: column;
+  }
+  &__footer {
+    flex-shrink: 0;
+    padding: 12px 20px;
+    border-top: 1px solid var(--card-header-border, #f0f2f5);
+  }
 }
 </style>
