@@ -47,4 +47,11 @@
   --side-nav-label-gradient: linear-gradient(180deg, #ffffff99 0%, #14cbf099 100%);
   --side-nav-label-gradient-active: linear-gradient(180deg, #ffffff 0%, #14cbf0 100%);
   --side-nav-label-glow: drop-shadow(0 0 4px rgba(20, 203, 240, 0.6));
+
+  /* 行情等级仪表 */
+  --gauge-level-empty: #25e391;      /* 空 */
+  --gauge-level-osc-empty: #00fff4;  /* 震荡空 */
+  --gauge-level-osc-long: #ffba21;   /* 震荡多 */
+  --gauge-level-long: #ff5134;       /* 多 */
+  --gauge-axis-width: 11px;
 }

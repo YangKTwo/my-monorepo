@@ -33,10 +33,10 @@ function onToolClick(key: string) {
 .screen-header__logo {
   position: absolute;
   left: 50%;
-  top: 0;
-  transform: translateX(-50%);
-  width: 1060px;
-  height: var(--screen-header-height, 70px);
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 60px;
   object-fit: contain;
   pointer-events: none;
   user-select: none;

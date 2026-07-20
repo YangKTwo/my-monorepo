@@ -3,7 +3,19 @@ export { default as LoginForm } from './components/Login/index.vue'
 export { default as ScreenPrimaryNav } from './components/ScreenPrimaryNav/index.vue'
 export { default as ScreenToolbar } from './components/ScreenToolbar/index.vue'
 export { default as ScreenSideNav } from './components/ScreenSideNav/index.vue'
+export { default as MarketLevelGauge } from './components/MarketLevelGauge/index.vue'
+export {
+  mapForecastToGauge,
+  pickLatestForecast,
+  mapLongShortToGauge,
+  pickLatestPredict
+} from './components/MarketLevelGauge/mapForecast'
 
 export type { ScreenNavItem } from './components/ScreenPrimaryNav/types.ts'
 export type { ScreenToolItem } from './components/ScreenToolbar/types'
 export type { ScreenSideNavItem } from './components/ScreenSideNav/types.js'
+export type {
+  ForecastPredict,
+  MarketLevelViewModel,
+  ForecastQuartilesVo
+} from './components/MarketLevelGauge/types'

@@ -37,7 +37,7 @@ const router = createRouter({
         {
           path: 'index',
           component: () => import('../layouts/modules/IndexLayout.vue'),
-          redirect: '/index/v-reverse', // 点顶栏「指数」默认进 V反
+          redirect: '/index/index-1', // 点顶栏「指数」默认进指数1
           children: [
             {
               path: 'index-1',

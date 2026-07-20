@@ -5,6 +5,8 @@ export { httpClient } from './cores/request'
 // ============ 用户模块 ============
 export * from './modules/user'
 
+export * from './modules/forecast'
+
 // // ============ 系统模块 ============
 // export * from './modules/system';
 
