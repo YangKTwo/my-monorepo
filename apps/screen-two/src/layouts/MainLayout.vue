@@ -1,6 +1,6 @@
 <template>
   <div class="main-layout">
-    <ScreenHeader />
+    <ScreenHeader @tool="onTool" />
     <main class="main-layout__content">
       <router-view />
     </main>
@@ -8,7 +8,26 @@
 </template>
 
 <script setup lang="ts">
+import { provide, ref } from 'vue'
 import ScreenHeader from '../components/ScreenHeader.vue'
+import { registerScreenRefreshKey, type ScreenRefreshFn } from '../composables/screenRefresh'
+
+/**
+ * 布局层持有「当前页刷新函数」。
+ * 子页面 mount 时 register，顶栏 refresh 时调用。
+ * 不把 fetch 写死在 Layout，是因为各页接口不同。
+ */
+const refreshHandler = ref<ScreenRefreshFn | null>(null)
+
+provide(registerScreenRefreshKey, (fn) => {
+  refreshHandler.value = fn
+})
+
+function onTool(key: string) {
+  if (key === 'refresh') {
+    void refreshHandler.value?.()
+  }
+}
 </script>
 
 <style scoped lang="scss">

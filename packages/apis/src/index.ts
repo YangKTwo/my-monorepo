@@ -7,6 +7,8 @@ export * from './modules/user'
 
 export * from './modules/forecast'
 
+export * from './modules/vBack'
+
 // // ============ 系统模块 ============
 // export * from './modules/system';
 

@@ -3,8 +3,13 @@ import { ScreenPrimaryNav, ScreenToolbar } from '@my-repo/business'
 import { primaryNavItems } from '../constants/primaryNav'
 import { toolbarItems } from '../constants/toolbar'
 
+const emit = defineEmits<{
+  tool: [key: string]
+}>()
+
 function onToolClick(key: string) {
-  console.log(key)
+  // Header 只负责抛事件，不关心业务怎么刷数
+  emit('tool', key)
 }
 </script>
 

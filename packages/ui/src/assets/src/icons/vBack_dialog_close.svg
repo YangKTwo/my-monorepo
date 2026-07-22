@@ -1,0 +1,15 @@
+
+
+<svg width="49px" height="49px" viewBox="0 0 49 49" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="画板" transform="translate(-340.000000, -70.000000)">
+            <g id="编组-10" transform="translate(340.000000, 70.000000)">
+                <g id="编组" transform="translate(1.961586, 2.332233)" fill="#9DFFFE" fill-opacity="0.8">
+                    <polygon id="矩形" transform="translate(22.535385, 22.535385) rotate(45.000000) translate(-22.535385, -22.535385) " points="17.1106245 0.226100488 21.1032037 -3.90970156 25.5730523 0.688528234 27.9601458 44.3723386 23.9933771 48.9804719 19.497718 43.9099109"></polygon>
+                    <polygon id="矩形备份" transform="translate(22.535385, 22.553636) rotate(135.000000) translate(-22.535385, -22.553636) " points="19.497718 0.706778977 23.9675666 -3.89145081 27.9601458 0.244351231 25.5730523 43.9281616 21.0773932 48.9987226 17.1106245 44.3905894"></polygon>
+                </g>
+                <rect id="矩形" stroke="#9DFFFE" stroke-width="2" x="1" y="1" width="47" height="47"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

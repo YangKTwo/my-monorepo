@@ -4,12 +4,20 @@ export { default as ScreenPrimaryNav } from './components/ScreenPrimaryNav/index
 export { default as ScreenToolbar } from './components/ScreenToolbar/index.vue'
 export { default as ScreenSideNav } from './components/ScreenSideNav/index.vue'
 export { default as MarketLevelGauge } from './components/MarketLevelGauge/index.vue'
+export { default as VReverseProbability } from './components/VReverseProbability/index.vue'
+export { default as VBackPast5Dialog } from './components/VBackPast5Dialog/index.vue'
+
 export {
   mapForecastToGauge,
   pickLatestForecast,
   mapLongShortToGauge,
   pickLatestPredict
 } from './components/MarketLevelGauge/mapForecast'
+export {
+  mapVBackToView,
+  mapAntiVToView,
+  mapNewVRightToView
+} from './components/VReverseProbability/mapVBack'
 
 export type { ScreenNavItem } from './components/ScreenPrimaryNav/types.ts'
 export type { ScreenToolItem } from './components/ScreenToolbar/types'
@@ -19,3 +27,8 @@ export type {
   MarketLevelViewModel,
   ForecastQuartilesVo
 } from './components/MarketLevelGauge/types'
+export {
+  type VReverseProbabilityViewModel,
+  type ProbMode
+} from './components/VReverseProbability/types'
+export type { VBackPast5DialogProps } from './components/VBackPast5Dialog/types'
