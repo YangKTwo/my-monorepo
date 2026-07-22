@@ -5,12 +5,14 @@
 </template>
 
 <script setup lang="ts">
+import bgImage from '@my-repo/ui/src/assets/src/images/bg_brown.png'
+
 const bgStyle = {
-  // backgroundImage: `url(${bgImage})`,
+  backgroundImage: `url(${bgImage})`,
   backgroundSize: 'cover',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
-  backgroundColor: '#0a1628'
+  backgroundColor: 'var(--background-color, #0a1628)'
 }
 </script>
 

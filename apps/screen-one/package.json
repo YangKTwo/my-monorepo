@@ -9,6 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@my-repo/apis": "workspace:*",
+    "@my-repo/business": "workspace:*",
+    "@my-repo/hooks": "workspace:*",
     "@my-repo/theme": "workspace:*",
     "@my-repo/ui": "workspace:*",
     "@my-repo/stores": "workspace:*",

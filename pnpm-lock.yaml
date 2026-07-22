@@ -258,6 +258,15 @@ importers:
 
   apps/screen-one:
     dependencies:
+      '@my-repo/apis':
+        specifier: workspace:*
+        version: link:../../packages/apis
+      '@my-repo/business':
+        specifier: workspace:*
+        version: link:../../packages/business
+      '@my-repo/hooks':
+        specifier: workspace:*
+        version: link:../../packages/hooks
       '@my-repo/stores':
         specifier: workspace:*
         version: link:../../packages/stores

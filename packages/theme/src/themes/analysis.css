@@ -1,15 +1,49 @@
 :root {
-  --primary-color: #4a9eff;
-  --nav-active-color: #4a9eff;
-  --nav-active-glow: rgba(74, 158, 255, 0.8);
+  /* 主色：取渐变末端米金 */
+  --primary-color: #f3e3c4;
+  --nav-active-color: #f3e3c4;
+  --nav-active-glow: rgba(243, 227, 196, 0.6);
   --background-color: #0a1628;
   --text-color: #e5eaf0;
   --text-secondary: rgba(255, 255, 255, 0.6);
 
-  /* 先与 dynamic 同值 */
-  --card-bg-color: rgba(0, 52, 98, 0.6);
-  --card-border-color: rgba(20, 203, 240, 0.2);
+  --font-family: 'Alibaba PuHuiTi 3.0', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-family-number: var(--font-family);
+
+  --toolbar-btn-size: 24px;
+  --toolbar-btn-radius: 2px;
+  --toolbar-gap: 20px;
+  --screen-header-height: 70px;
+  --screen-header-padding-x: 20px;
+
+  /* —— 卡片（对齐你给的 Card 稿） —— */
+  --card-bg-color: rgba(210, 186, 140, 0.06);
+  --card-border-color: rgba(243, 227, 196, 0.1);
   --card-border-radius: 4px;
-  --card-inset-shadow: inset 0 0 10px 0 rgba(20, 203, 240, 0.4);
-  --card-header-border: rgba(20, 203, 240, 0.15);
+  --card-inset-shadow: none;
+  --card-header-border: rgba(243, 227, 196, 0.1);
+  --card-gap: 20px;
+  --card-padding: 10px;
+
+  /* —— 侧栏尺寸（可与 dynamic 同结构） —— */
+  --side-nav-height: 800px;
+  --side-nav-gap: 6px;
+  --side-nav-item-min-width: 32px;
+  --side-nav-item-padding: 8px;
+  --side-nav-item-radius: 4px;
+  --side-nav-badge-size: 32px;
+  --side-nav-icon-size: 22px;
+  --side-nav-char-size: 16px;
+  --side-nav-char-gap: 4px;
+
+  /* —— 侧栏皮肤（对齐竖排文字稿） —— */
+  --side-nav-item-active-bg: rgba(210, 186, 140, 0.12);
+  --side-nav-item-active-border: rgba(243, 227, 196, 0.35);
+  --side-nav-item-active-shadow: inset 0 0 4px 0 rgba(243, 227, 196, 0.45);
+
+  /* 默认 / 选中都可用同一套米金渐变；若设计有区分再拆开 */
+  --side-nav-label-gradient: linear-gradient(180deg, #ffffff 0%, #f3e3c4 100%);
+  --side-nav-label-gradient-active: linear-gradient(180deg, #ffffff 0%, #f3e3c4 100%);
+  /* 渐变字用 filter，等价稿里的 text-shadow */
+  --side-nav-label-glow: drop-shadow(0 0 4px rgba(243, 227, 196, 0.6));
 }
