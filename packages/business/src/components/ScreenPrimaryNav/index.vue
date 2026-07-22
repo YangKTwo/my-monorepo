@@ -13,13 +13,13 @@
         :class="{ 'is-active': isItemActive(item, isActive, isExactActive) }"
         :aria-label="item.label"
         :title="item.label"
+        @mouseenter="hoveredPath = item.path"
+        @mouseleave="hoveredPath = null"
         @click="navigate"
       >
         <img
           class="screen-primary-nav__icon"
-          :src="
-            isItemActive(item, isActive, isExactActive) ? item.activeIcon || item.icon : item.icon
-          "
+          :src="resolveIcon(item, isActive, isExactActive)"
           alt=""
         />
       </button>
@@ -28,6 +28,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
 import type { ScreenNavItem } from './types'
 
@@ -36,6 +37,7 @@ defineProps<{
 }>()
 
 const route = useRoute()
+const hoveredPath = ref<string | null>(null)
 
 function isItemActive(item: ScreenNavItem, isAction: boolean, isExactAction: boolean) {
   if (item.match) {
@@ -44,6 +46,13 @@ function isItemActive(item: ScreenNavItem, isAction: boolean, isExactAction: boo
       : item.match.test(route.path)
   }
   return isAction || isExactAction
+}
+
+function resolveIcon(item: ScreenNavItem, isAction: boolean, isExactAction: boolean) {
+  const active = isItemActive(item, isAction, isExactAction)
+  if (active) return item.activeIcon || item.icon
+  if (hoveredPath.value === item.path) return item.hoverIcon || item.icon
+  return item.icon
 }
 </script>
 
@@ -55,8 +64,8 @@ function isItemActive(item: ScreenNavItem, isAction: boolean, isExactAction: boo
   height: var(--nav-item-height, 40px);
   z-index: 2;
 }
+
 .screen-primary-nav__item {
-  position: static;
   box-sizing: border-box;
   width: var(--nav-item-width, 72px);
   height: var(--nav-item-height, 40px);
@@ -66,40 +75,15 @@ function isItemActive(item: ScreenNavItem, isAction: boolean, isExactAction: boo
   background: transparent;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  opacity: var(--nav-item-opacity, 0.4);
-  color: var(--text-secondary, rgba(255, 255, 255, 0.6));
-  transition:
-    opacity 0.2s,
-    color 0.2s;
   flex-shrink: 0;
-  &:hover {
-    opacity: 0.75;
-    color: var(--text-color, #e5eaf0);
-  }
-  &.is-active {
-    opacity: 1;
-    color: var(--nav-active-color, var(--primary-color, #14cbf0));
-    .screen-primary-nav__icon {
-      filter: drop-shadow(0 0 6px var(--nav-active-glow, rgba(20, 203, 240, 0.8)));
-    }
-    .screen-primary-nav__label {
-      font-weight: 600;
-    }
-  }
 }
+
 .screen-primary-nav__icon {
   width: 100%;
   height: 100%;
   object-fit: contain;
   pointer-events: none;
-}
-.screen-primary-nav__label {
-  font-size: 12px;
-  line-height: 1;
-  white-space: nowrap;
 }
 </style>

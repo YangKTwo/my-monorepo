@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="72" height="40" viewBox="0 0 72 40" fill="none">
+  <!-- TODO: 粘贴原型「首页-悬浮」SVG 内容到本文件（可整文件替换） -->
+  <rect x="1" y="1" width="70" height="38" rx="4" stroke="#666" stroke-dasharray="4 3" fill="rgba(255,255,255,0.06)"/>
+  <text x="36" y="23" text-anchor="middle" fill="#888" font-size="9" font-family="sans-serif">home_hover</text>
+</svg>
