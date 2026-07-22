@@ -13,3 +13,4 @@ export type { StatisticsData, UseStatisticsReturn } from './modules/useStatistic
 export { tokenStorage } from './core/token'
 export { useMarketGauge } from './modules/useMarketGauge'
 export { useVBackProb } from './modules/useVBackProb'
+export { useSizingStyle } from './modules/useSizingStyle'

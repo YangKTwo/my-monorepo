@@ -17,7 +17,11 @@ function onToolClick(key: string) {
   <header class="screen-header">
     <ScreenPrimaryNav :items="primaryNavItems" />
     <img class="screen-header__logo" src="../assets/logo_blue.png" alt="" />
-    <ScreenToolbar :tools="toolbarItems" @click="onToolClick" />
+    <ScreenToolbar
+      :tools="toolbarItems"
+      tip="Tips：按下F11可全屏，再次按下F11取消全屏"
+      @click="onToolClick"
+    />
   </header>
 </template>
 
@@ -33,6 +37,7 @@ function onToolClick(key: string) {
   justify-content: space-between;
   flex-shrink: 0;
   z-index: 10;
+  overflow: visible;
 }
 /* 中间 logo：不占 flex 空间、不挡点击 */
 .screen-header__logo {

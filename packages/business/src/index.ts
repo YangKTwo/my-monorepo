@@ -6,6 +6,7 @@ export { default as ScreenSideNav } from './components/ScreenSideNav/index.vue'
 export { default as MarketLevelGauge } from './components/MarketLevelGauge/index.vue'
 export { default as VReverseProbability } from './components/VReverseProbability/index.vue'
 export { default as VBackPast5Dialog } from './components/VBackPast5Dialog/index.vue'
+export { default as CapStyleGauge } from './components/CapStyleGauge/index.vue'
 
 export {
   mapForecastToGauge,
@@ -18,6 +19,7 @@ export {
   mapAntiVToView,
   mapNewVRightToView
 } from './components/VReverseProbability/mapVBack'
+export { mapSizingStyleProbToView } from './components/CapStyleGauge/mapSizingStyle'
 
 export type { ScreenNavItem } from './components/ScreenPrimaryNav/types.ts'
 export type { ScreenToolItem } from './components/ScreenToolbar/types'
@@ -32,3 +34,8 @@ export {
   type ProbMode
 } from './components/VReverseProbability/types'
 export type { VBackPast5DialogProps } from './components/VBackPast5Dialog/types'
+export type {
+  CapStyleViewModel,
+  CapDominant,
+  SizingStyleMode
+} from './components/CapStyleGauge/types'

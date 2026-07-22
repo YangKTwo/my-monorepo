@@ -18,6 +18,12 @@
   --toolbar-btn-size: 24px;
   --toolbar-btn-radius: 2px;
   --toolbar-gap: 20px;
+  /* 工具栏下方 Tips（相对工具栏定位，勿写死 left/top 像素稿） */
+  --toolbar-tip-font-size: 14px;
+  --toolbar-tip-line-height: 20px;
+  --toolbar-tip-color: var(--primary-color);
+  --toolbar-tip-shadow: 0 0 4px var(--nav-active-glow);
+  --toolbar-tip-offset: 12px;
 
   --screen-header-height: 70px;
   --screen-header-padding-x: 20px;
@@ -49,9 +55,14 @@
   --side-nav-label-glow: drop-shadow(0 0 4px rgba(20, 203, 240, 0.6));
 
   /* 行情等级仪表 */
-  --gauge-level-empty: #25e391;      /* 空 */
-  --gauge-level-osc-empty: #00fff4;  /* 震荡空 */
-  --gauge-level-osc-long: #ffba21;   /* 震荡多 */
-  --gauge-level-long: #ff5134;       /* 多 */
+  --gauge-level-empty: #25e391; /* 空 */
+  --gauge-level-osc-empty: #00fff4; /* 震荡空 */
+  --gauge-level-osc-long: #ffba21; /* 震荡多 */
+  --gauge-level-long: #ff5134; /* 多 */
   --gauge-axis-width: 11px;
+
+  /* 大小风格盘*/
+  --cap-style-big: #ff5a7a;
+  --cap-style-small: #19ebff;
+  --cap-style-track: rgba(255, 255, 255, 0.08);
 }

@@ -9,6 +9,8 @@ export * from './modules/forecast'
 
 export * from './modules/vBack'
 
+export * from './modules/sizingStyle'
+
 // // ============ 系统模块 ============
 // export * from './modules/system';
 

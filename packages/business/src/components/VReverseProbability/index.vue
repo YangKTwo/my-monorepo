@@ -28,8 +28,8 @@
       </div>
     </header>
 
-    <div class="v-prob__chart">
-      <Chart :option="chartOption" width="100%" height="100%" />
+    <div ref="chartWrapRef" class="v-prob__chart">
+      <Chart ref="chartRef" :option="chartOption" width="100%" height="100%" />
     </div>
 
     <div class="v-prob__stats">
@@ -50,8 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { Chart, UiDatePicker, UiSelect, type ChartOption } from '@my-repo/ui'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { Chart, UiDatePicker, UiSelect, type ChartOption, type UiSelectOption } from '@my-repo/ui'
 import type { ProbMode, VProbPoint, VReverseProbabilityViewModel } from './types'
 
 const props = defineProps<{
@@ -61,6 +61,23 @@ const props = defineProps<{
   dealDate: string
 }>()
 
+const chartWrapRef = ref<HTMLElement>()
+const chartRef = ref<{ resize: () => void } | null>(null)
+let chartResizeObserver: ResizeObserver | null = null
+
+onMounted(() => {
+  if (!chartWrapRef.value) return
+  chartResizeObserver = new ResizeObserver(() => {
+    chartRef.value?.resize()
+  })
+  chartResizeObserver.observe(chartWrapRef.value)
+})
+
+onBeforeUnmount(() => {
+  chartResizeObserver?.disconnect()
+  chartResizeObserver = null
+})
+
 const emit = defineEmits<{
   'update:mode': [ProbMode]
   'update:dealDate': [string]
@@ -69,17 +86,17 @@ const emit = defineEmits<{
 
 const pointType = ref<'突破点' | '启动点'>('突破点')
 
-const pointTypeOptions = [
+const pointTypeOptions: UiSelectOption[] = [
   { label: '突破点', value: '突破点' },
   { label: '启动点', value: '启动点' }
-] as const
+]
 
-const modeOptions = [
+const modeOptions: UiSelectOption[] = [
   { label: 'V反概率预估综合', value: 'merge' },
   { label: 'V反概率预估曲线', value: 'curve' },
   { label: '反V概率预估', value: 'anti' },
   { label: '新V右概率', value: 'newRight' }
-] as const
+]
 
 function onModeChange(v: string | number | boolean | null) {
   emit('update:mode', v as ProbMode)
@@ -563,7 +580,8 @@ function buildMode4Option(d: VReverseProbabilityViewModel): ChartOption {
 }
 .v-prob__chart {
   flex: 1;
-  min-height: 200px;
+  min-height: 0; /* 避免小高度撑破 */
+  position: relative;
 }
 .v-prob__stats {
   display: grid;

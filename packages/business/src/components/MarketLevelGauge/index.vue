@@ -112,6 +112,7 @@ onBeforeUnmount(() => {
   flex-direction: column;
   color: var(--text-color, #e5eaf0);
   font-family: var(--font-family);
+  container-type: inline-size;
 }
 
 /* —— 顶栏 —— */
