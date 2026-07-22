@@ -65,7 +65,7 @@ function emptyVm(mode: ProbMode): VReverseProbabilityViewModel {
   }
 }
 
-/** Mode1/2 */
+/** Mode1/2 */ /**在index1接受到json数据后进行数据格式转换 */
 export function mapVBackToView(
   data: VBackPredictData,
   opts: { mode: 'merge' | 'curve'; sse?: SseIndexMinData }

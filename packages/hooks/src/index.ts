@@ -11,3 +11,5 @@ export { useStatistics } from './modules/useStatistics'
 export type { StatisticsData, UseStatisticsReturn } from './modules/useStatistics'
 
 export { tokenStorage } from './core/token'
+export { useMarketGauge } from './modules/useMarketGauge'
+export { useVBackProb } from './modules/useVBackProb'

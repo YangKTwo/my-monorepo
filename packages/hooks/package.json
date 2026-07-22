@@ -8,7 +8,8 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@my-repo/apis": "workspace:*"
+    "@my-repo/apis": "workspace:*",
+    "@my-repo/business": "workspace:*"
   },
   "peerDependencies": {
     "vue": "^3.3.0"
