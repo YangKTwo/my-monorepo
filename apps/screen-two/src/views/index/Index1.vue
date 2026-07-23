@@ -29,6 +29,7 @@
             :mode="capMode"
             :data="capData"
             :phase-data="phaseData"
+            :curve-bar-data="curveBarData"
             @toggle-mode="toggleCapMode"
           />
         </div>
@@ -94,6 +95,7 @@ const {
   mode: capMode,
   data: capData,
   phaseData,
+  curveBarData,
   toggleMode: toggleCapMode,
   refresh: refreshCap
 } = useSizingStyle()

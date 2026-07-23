@@ -1,8 +1,11 @@
 /** 本地检测：用 mocks；真接口有数据后改回 sizingStyleApi */
 import { sizingStyleMockApi } from '@my-repo/apis'
 import {
+  CapCurveBarViewModel,
   CapPhaseViewModel,
   CapStyleViewModel,
+  mapSizingStyleListToCurveBar,
+  mapSizingStyleListToPhase,
   mapSizingStyleProbToView,
   SizingStyleMode
 } from '@my-repo/business'
@@ -16,10 +19,17 @@ function readMode(): SizingStyleMode {
   return v === 1 || v === 2 ? v : 0
 }
 
+function today() {
+  const d = new Date()
+  const p = (n: number) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`
+}
+
 export function useSizingStyle() {
   const mode = ref<SizingStyleMode>(readMode())
   const data = ref<CapStyleViewModel | null>(null)
   const phaseData = ref<CapPhaseViewModel | null>(null)
+  const curveBarData = ref<CapCurveBarViewModel | null>(null)
   const loading = ref(false)
 
   /** mode0：双环概率 */
@@ -28,32 +38,36 @@ export function useSizingStyle() {
     data.value = mapSizingStyleProbToView(raw)
   }
 
-  /** mode1：二维相空间路径 */
-  async function refreshPhase() {
-    const raw = await sizingStyleMockApi.getSizingStylePhasePath()
-    phaseData.value = raw
+  /**mode1 mode2 */
+  async function refreshList() {
+    const day = today()
+    const list = await sizingStyleMockApi.getSizingStyleList({
+      startDate: day,
+      endDate: day
+    })
+    if (mode.value === 1) {
+      phaseData.value = mapSizingStyleListToPhase(list)
+      curveBarData.value = null
+    } else if (mode.value === 2) {
+      curveBarData.value = mapSizingStyleListToCurveBar(list)
+      phaseData.value = null
+    }
   }
 
   async function refresh() {
     loading.value = true
     try {
-      if (mode.value === 0) {
-        await refreshProb()
-      } else if (mode.value === 1) {
-        await refreshPhase()
-      } else {
-        // mode2 暂未实现
-        phaseData.value = null
-      }
+      if (mode.value === 0) await refreshProb()
+      else await refreshList()
     } catch (e) {
       console.error('[SizingStyle] refresh failed', e)
-      if (mode.value === 0) data.value = null
-      else phaseData.value = null
+      data.value = null
+      phaseData.value = null
+      curveBarData.value = null
     } finally {
       loading.value = false
     }
   }
-
   function setMode(next: SizingStyleMode) {
     mode.value = next
     localStorage.setItem(MODE_KEY, String(next))
@@ -69,6 +83,7 @@ export function useSizingStyle() {
     mode,
     data,
     phaseData,
+    curveBarData,
     loading,
     setMode,
     toggleMode,

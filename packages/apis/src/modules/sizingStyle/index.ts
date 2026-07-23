@@ -4,7 +4,9 @@ export type {
   SizingStyleItem,
   GetSizingStyleListParams,
   SizingStyleHistoryItem,
-  SizingStyleHistoryData,
-  SizingStylePhasePoint,
-  SizingStylePhasePath
+  SizingStyleHistoryData
+  // SizingStylePhasePoint,
+  // SizingStylePhasePath
 } from './type'
+export { SizingStyleType } from './type'
+export type { SizingStyleTypeCode } from './type'

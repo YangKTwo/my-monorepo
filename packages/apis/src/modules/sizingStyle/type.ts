@@ -5,11 +5,21 @@ export interface SizingStyleProb {
   smallStyleRatio: number
 }
 
+// 分时指标类型
+export const SizingStyleType = {
+  RS: 1,
+  HP: 2,
+  HP1: 3,
+  HP2: 4
+} as const
+
+export type SizingStyleTypeCode = (typeof SizingStyleType)[keyof typeof SizingStyleType]
+
 export interface SizingStyleItem {
   id: number
   dealDate: number
   dataValue: number
-  styleType: number
+  styleType: SizingStyleTypeCode | number
 }
 
 export interface GetSizingStyleListParams {
@@ -36,14 +46,14 @@ export interface SizingStyleHistoryItem {
 export type SizingStyleHistoryData = SizingStyleHistoryItem[]
 
 /** mode1：二维相空间路径点 */
-export interface SizingStylePhasePoint {
-  time: string
-  hp1: number
-  hp2: number
-  mark?: 'open' | 'tick' | 'now'
-}
+// export interface SizingStylePhasePoint {
+//   time: string
+//   hp1: number
+//   hp2: number
+//   mark?: 'open' | 'tick' | 'now'
+// }
 
-export interface SizingStylePhasePath {
-  points: SizingStylePhasePoint[]
-  domain?: number
-}
+// export interface SizingStylePhasePath {
+//   points: SizingStylePhasePoint[]
+//   domain?: number
+// }

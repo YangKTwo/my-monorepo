@@ -19,7 +19,11 @@ export {
   mapAntiVToView,
   mapNewVRightToView
 } from './components/VReverseProbability/mapVBack'
-export { mapSizingStyleProbToView } from './components/CapStyleGauge/mapSizingStyle'
+export {
+  mapSizingStyleProbToView,
+  mapSizingStyleListToPhase,
+  mapSizingStyleListToCurveBar
+} from './components/CapStyleGauge/mapSizingStyle'
 
 export type { ScreenNavItem } from './components/ScreenPrimaryNav/types.ts'
 export type { ScreenToolItem } from './components/ScreenToolbar/types'
@@ -37,6 +41,7 @@ export type { VBackPast5DialogProps } from './components/VBackPast5Dialog/types'
 export type {
   CapStyleViewModel,
   CapPhaseViewModel,
+  CapCurveBarViewModel,
   CapDominant,
   SizingStyleMode
 } from './components/CapStyleGauge/types'

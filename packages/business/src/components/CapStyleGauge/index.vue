@@ -30,7 +30,15 @@
       <div v-else-if="mode === 1" class="phase-wrap">
         <CapPhaseGauge v-if="phaseData" :data="phaseData" />
       </div>
-      <div v-else class="phase-wrap phase-wrap--empty">形态开发中</div>
+      <div v-else-if="mode === 2" ref="curveWrapRef" class="curve-wrap">
+        <Chart
+          v-if="curveBarData"
+          ref="curveChartRef"
+          :option="curveBarOption"
+          width="100%"
+          height="100%"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -38,13 +46,15 @@
 <script setup lang="ts">
 import { Chart, ChartOption } from '@my-repo/ui'
 import CapPhaseGauge from './CapPhaseViewModel.vue'
-import type { CapPhaseViewModel, CapStyleViewModel } from './types'
+import type { CapCurveBarViewModel, CapPhaseViewModel, CapStyleViewModel } from './types'
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { buildCapCurveBarOption } from './buildCapCurveBarOption.js'
 
 const props = defineProps<{
   mode: 0 | 1 | 2
   data?: CapStyleViewModel | null
   phaseData?: CapPhaseViewModel | null
+  curveBarData?: CapCurveBarViewModel | null
 }>()
 
 const emit = defineEmits<{
@@ -67,6 +77,14 @@ const verdictLabel = computed(() => {
   if (props.data?.dominant === 'balance') return '风格均衡'
   return '大盘占优'
 })
+
+const curveWrapRef = ref<HTMLElement>()
+const curveChartRef = ref<{ resize: () => void } | null>(null)
+let ro: ResizeObserver | null = null
+
+const curveBarOption = computed<ChartOption>(() =>
+  props.curveBarData ? buildCapCurveBarOption(props.curveBarData) : { series: [] }
+)
 
 function cssVar(name: string, fallback: string) {
   const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim()
@@ -118,10 +136,14 @@ onMounted(() => {
   if (!bodyRef.value) return
   resizeObserver = new ResizeObserver(() => chartRef.value?.resize())
   resizeObserver.observe(bodyRef.value)
+  if (!curveWrapRef.value) return
+  ro = new ResizeObserver(() => curveChartRef.value?.resize())
+  ro.observe(curveWrapRef.value)
 })
 
 onBeforeUnmount(() => {
   resizeObserver?.disconnect()
+  ro?.disconnect()
 })
 </script>
 
@@ -332,5 +354,12 @@ onBeforeUnmount(() => {
     color: rgba(255, 255, 255, 0.45);
     font-size: 13px;
   }
+}
+
+.curve-wrap {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
 }
 </style>

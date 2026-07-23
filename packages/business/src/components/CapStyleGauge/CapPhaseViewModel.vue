@@ -237,7 +237,6 @@ onBeforeUnmount(() => {
 }
 
 .cap-phase-path__host {
-  /* height:0 + flex:1：占满剩余空间，但不被内部 SVG 反向撑高 */
   flex: 1 1 auto;
   height: 0;
   min-height: 0;
