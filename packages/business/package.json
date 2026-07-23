@@ -8,23 +8,27 @@
     ".": "./src/index.ts"
   },
   "peerDependencies": {
-    "vue": "^3.4.0",
-    "vue-router": "^5.1.0",
-    "@my-repo/ui": "workspace:*",
-    "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
-    "element-plus": "^2.7.0",
+    "@my-repo/hooks": "workspace:*",
     "@my-repo/stores": "workspace:*",
-    "pinia": "^3.0.0"
+    "@my-repo/ui": "workspace:*",
+    "element-plus": "^2.7.0",
+    "pinia": "^3.0.0",
+    "vue": "^3.4.0",
+    "vue-router": "^5.1.0"
   },
   "devDependencies": {
-    "vue": "^3.4.0",
-    "vue-router": "^5.1.0",
-    "@my-repo/ui": "workspace:*",
-    "@my-repo/hooks": "workspace:*",
     "@my-repo/apis": "workspace:*",
-    "element-plus": "^2.7.0",
+    "@my-repo/hooks": "workspace:*",
     "@my-repo/stores": "workspace:*",
-    "pinia": "^3.0.0"
+    "@my-repo/ui": "workspace:*",
+    "@types/d3": "^7.4.3",
+    "element-plus": "^2.7.0",
+    "pinia": "^3.0.0",
+    "vue": "^3.4.0",
+    "vue-router": "^5.1.0"
+  },
+  "dependencies": {
+    "d3": "^7.9.0"
   }
 }

@@ -8,25 +8,26 @@
   --font-family-number: var(--font-family);
 
   /* 顶栏 */
-  --nav-item-width: 72px;
-  --nav-item-height: 40px;
-  --nav-item-gap: 20px;
+  --nav-item-width: clamp(48px, 3.75vw, 72px);
+  --nav-item-height: clamp(28px, 2.08vw, 40px);
+  --nav-item-gap: clamp(10px, 1.04vw, 20px);
   --nav-item-opacity: 0.4;
   --nav-active-color: #14cbf0;
   --nav-active-glow: rgba(20, 203, 240, 0.8);
 
-  --toolbar-btn-size: 24px;
+  --toolbar-btn-size: clamp(18px, 1.25vw, 24px);
+  --toolbar-gap: clamp(10px, 1.04vw, 20px);
+  --toolbar-tip-font-size: clamp(11px, 0.73vw, 14px);
   --toolbar-btn-radius: 2px;
-  --toolbar-gap: 20px;
-  /* 工具栏下方 Tips（相对工具栏定位，勿写死 left/top 像素稿） */
+
   --toolbar-tip-font-size: 14px;
   --toolbar-tip-line-height: 20px;
   --toolbar-tip-color: var(--primary-color);
   --toolbar-tip-shadow: 0 0 4px var(--nav-active-glow);
   --toolbar-tip-offset: 12px;
 
-  --screen-header-height: 70px;
-  --screen-header-padding-x: 20px;
+  --screen-header-height: clamp(48px, 3.65vw, 70px);
+  --screen-header-padding-x: clamp(12px, 1.04vw, 20px);
 
   /* Card */
   --card-bg-color: rgba(0, 52, 98, 0.6);
@@ -35,18 +36,18 @@
   --card-inset-shadow: inset 0 0 10px 0 rgba(20, 203, 240, 0.4);
   --card-header-border: rgba(20, 203, 240, 0.15);
 
-  /* 栅栏：尺寸 */
-  --side-nav-height: 800px;
-  --side-nav-gap: 6px;
-  --side-nav-item-min-width: 32px;
-  --side-nav-item-padding: 8px;
+  /* 侧栏：尺寸 */
+  --side-nav-height: 100%;
+  --side-nav-gap: clamp(4px, 0.3vw, 6px);
+  --side-nav-item-min-width: clamp(24px, 1.67vw, 32px);
+  --side-nav-item-padding: clamp(6px, 0.4vw, 8px);
   --side-nav-item-radius: 4px;
-  --side-nav-badge-size: 32px;
-  --side-nav-icon-size: 22px;
-  --side-nav-char-size: 16px;
-  --side-nav-char-gap: 4px;
+  --side-nav-badge-size: clamp(24px, 1.67vw, 32px);
+  --side-nav-icon-size: clamp(16px, 1.15vw, 22px);
+  --side-nav-char-size: clamp(12px, 0.83vw, 16px);
+  --side-nav-char-gap: clamp(2px, 0.2vw, 4px);
 
-  /* 栅栏：皮肤（换 app 主要改这里） */
+  /* 栅栏 */
   --side-nav-item-active-bg: rgba(0, 52, 98, 0.6);
   --side-nav-item-active-border: rgba(20, 203, 240, 0.6);
   --side-nav-item-active-shadow: inset 0 0 4px 0 #14cbf0;

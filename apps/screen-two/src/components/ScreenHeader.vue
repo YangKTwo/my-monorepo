@@ -8,7 +8,6 @@ const emit = defineEmits<{
 }>()
 
 function onToolClick(key: string) {
-  // Header 只负责抛事件，不关心业务怎么刷数
   emit('tool', key)
 }
 </script>
@@ -39,14 +38,14 @@ function onToolClick(key: string) {
   z-index: 10;
   overflow: visible;
 }
-/* 中间 logo：不占 flex 空间、不挡点击 */
+/* 中间 logo */
 .screen-header__logo {
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 900px;
-  height: 60px;
+  width: clamp(480px, 46.875vw, 900px); /* 1920 下约 900px */
+  height: clamp(36px, 3.125vw, 60px);
   object-fit: contain;
   pointer-events: none;
   user-select: none;

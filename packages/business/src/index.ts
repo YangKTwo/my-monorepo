@@ -36,6 +36,7 @@ export {
 export type { VBackPast5DialogProps } from './components/VBackPast5Dialog/types'
 export type {
   CapStyleViewModel,
+  CapPhaseViewModel,
   CapDominant,
   SizingStyleMode
 } from './components/CapStyleGauge/types'

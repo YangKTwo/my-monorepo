@@ -34,3 +34,16 @@ export interface SizingStyleHistoryItem {
 }
 
 export type SizingStyleHistoryData = SizingStyleHistoryItem[]
+
+/** mode1：二维相空间路径点 */
+export interface SizingStylePhasePoint {
+  time: string
+  hp1: number
+  hp2: number
+  mark?: 'open' | 'tick' | 'now'
+}
+
+export interface SizingStylePhasePath {
+  points: SizingStylePhasePoint[]
+  domain?: number
+}

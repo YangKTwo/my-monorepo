@@ -1,5 +1,5 @@
 :root {
-  /* 主色：取渐变末端米金 */
+  /* 主色 */
   --primary-color: #f3e3c4;
   --nav-active-color: #f3e3c4;
   --nav-active-glow: rgba(243, 227, 196, 0.6);
@@ -16,33 +16,33 @@
   --screen-header-height: 70px;
   --screen-header-padding-x: 20px;
 
-  /* —— 卡片（对齐你给的 Card 稿） —— */
+  /* —— 卡片 —— */
   --card-bg-color: rgba(210, 186, 140, 0.06);
   --card-border-color: rgba(243, 227, 196, 0.1);
   --card-border-radius: 4px;
   --card-inset-shadow: none;
   --card-header-border: rgba(243, 227, 196, 0.1);
-  --card-gap: 12px; /* 略收紧，少溢出 */
+  --card-gap: 12px;
   --card-padding: 10px;
 
-  /* —— 侧栏尺寸（可与 dynamic 同结构） —— */
-  --side-nav-height: 620px; /* 实际会被布局改成 height:100%，此值作上限兜底 */
-  --side-nav-item-min-width: 28px;
-  --side-nav-item-padding: 6px;
-  --side-nav-badge-size: 28px;
-  --side-nav-icon-size: 18px;
-  --side-nav-char-size: 14px;
-  --side-nav-char-gap: 2px;
-  --side-nav-gap: 4px;
+  /* —— 侧栏尺寸 —— */
+  --side-nav-height: 620px;
+  --side-nav-item-min-width: 26px;
+  --side-nav-item-padding: 4px;
+  --side-nav-badge-size: 26px;
+  --side-nav-icon-size: 16px;
+  --side-nav-char-size: 12px;
+  --side-nav-char-gap: 1px;
+  --side-nav-gap: 3px;
 
-  /* —— 侧栏皮肤（对齐竖排文字稿） —— */
+  /* —— 侧栏皮肤 —— */
   --side-nav-item-active-bg: rgba(210, 186, 140, 0.12);
   --side-nav-item-active-border: rgba(243, 227, 196, 0.35);
   --side-nav-item-active-shadow: inset 0 0 4px 0 rgba(243, 227, 196, 0.45);
 
-  /* 默认 / 选中都可用同一套米金渐变；若设计有区分再拆开 */
+  /* 默认 */
   --side-nav-label-gradient: linear-gradient(180deg, #ffffff 0%, #f3e3c4 100%);
   --side-nav-label-gradient-active: linear-gradient(180deg, #ffffff 0%, #f3e3c4 100%);
-  /* 渐变字用 filter，等价稿里的 text-shadow */
+  /* 渐变字用 filter */
   --side-nav-label-glow: drop-shadow(0 0 4px rgba(243, 227, 196, 0.6));
 }

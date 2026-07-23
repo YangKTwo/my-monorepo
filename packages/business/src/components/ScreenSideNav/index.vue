@@ -55,7 +55,8 @@ function isItemActive(item: ScreenSideNavItem, isActive: boolean, isExactActive:
 <style scoped lang="scss">
 .screen-side-nav {
   flex-shrink: 0;
-  height: var(--side-nav-height, 968px);
+  height: 100%;
+  max-height: var(--side-nav-height, 100%);
 }
 
 .screen-side-nav__card {
@@ -70,11 +71,13 @@ function isItemActive(item: ScreenSideNavItem, isActive: boolean, isExactActive:
     flex-direction: column;
     align-items: center;
     gap: var(--side-nav-gap, 6px);
+    min-height: 0;
   }
 }
 
 .screen-side-nav__badge {
   width: 100%;
+  flex-shrink: 0;
   display: flex;
   justify-content: center;
 
@@ -107,12 +110,17 @@ function isItemActive(item: ScreenSideNavItem, isActive: boolean, isExactActive:
   align-items: center;
   gap: var(--side-nav-gap, 6px);
   width: 100%;
+  /* 文字按内容紧凑排布，不随侧栏高度均分拉开；侧栏卡片仍由外层 height:100% 对齐底边 */
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .screen-side-nav__item {
   box-sizing: border-box;
   width: fit-content;
   height: fit-content;
+  flex: 0 0 auto;
   min-width: var(--side-nav-item-min-width, 32px);
   margin: 0;
   padding: var(--side-nav-item-padding, 8px);
@@ -134,7 +142,7 @@ function isItemActive(item: ScreenSideNavItem, isActive: boolean, isExactActive:
 .screen-side-nav__label {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
   gap: var(--side-nav-char-gap, 4px);
 }

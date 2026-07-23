@@ -22,18 +22,20 @@ import { indexSideNavItems } from '../../constants/indexSideNav'
 <style scoped lang="scss">
 .index-layout {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch; /* 侧栏与内容同高，底边对齐第二行卡片 */
   width: 100%;
   height: 100%;
   min-height: 0;
-  padding: 26px 0 0 16px;
+  padding: 26px 0 clamp(12px, 1.2vw, 16px) 16px;
   box-sizing: border-box;
-  gap: 16px;
+  gap: clamp(12px, 1.2vw, 16px);
   overflow: hidden;
 }
 
 .index-layout__side {
   flex-shrink: 0;
+  height: 100%;
+  max-height: 100%;
 }
 
 .index-layout__content {
@@ -41,7 +43,6 @@ import { indexSideNavItems } from '../../constants/indexSideNav'
   min-width: 0;
   min-height: 0;
   overflow: hidden;
-  align-self: stretch;
 }
 
 .index-side-toggle {

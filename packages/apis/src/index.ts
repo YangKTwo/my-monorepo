@@ -11,6 +11,9 @@ export * from './modules/vBack'
 
 export * from './modules/sizingStyle'
 
+/** 本地假接口：见 ./mocks（与 modules 真接口并列，接真后改 hook 的 import） */
+export * from './mocks'
+
 // // ============ 系统模块 ============
 // export * from './modules/system';
 

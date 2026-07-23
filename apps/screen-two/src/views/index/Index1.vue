@@ -25,7 +25,12 @@
 
       <UiCard variant="dashboard" class="panel panel--cap" no-padding>
         <div class="panel__body">
-          <CapStyleGauge v-if="capData" :data="capData" />
+          <CapStyleGauge
+            :mode="capMode"
+            :data="capData"
+            :phase-data="phaseData"
+            @toggle-mode="toggleCapMode"
+          />
         </div>
       </UiCard>
     </div>
@@ -85,7 +90,13 @@ const dealDate = ref(today())
 const registerScreenRefresh = inject(registerScreenRefreshKey, null)
 
 const { viewData, toggle, refresh: refreshGauge } = useMarketGauge(dealDate)
-const { data: capData, refresh: refreshCap } = useSizingStyle()
+const {
+  mode: capMode,
+  data: capData,
+  phaseData,
+  toggleMode: toggleCapMode,
+  refresh: refreshCap
+} = useSizingStyle()
 const {
   data: vProb,
   mode: probMode,
@@ -143,13 +154,14 @@ watch(dealDate, (v) => {
   gap: clamp(12px, 1.2vw, 16px);
   height: 100%;
   min-height: 0;
-  padding: 0 clamp(12px, 1.2vw, 16px) clamp(12px, 1.2vw, 16px) 0;
+  padding: 0 clamp(12px, 1.2vw, 16px) 0 0;
   box-sizing: border-box;
   overflow: auto;
 }
 
 .index-1__row {
   display: flex;
+  flex: 1 1 0;
   align-items: stretch;
   gap: clamp(12px, 1.2vw, 16px);
   min-height: 0;
@@ -163,6 +175,7 @@ watch(dealDate, (v) => {
   box-sizing: border-box;
   min-width: 0;
   min-height: 0;
+  height: 100%;
 }
 
 .panel__body {
@@ -174,26 +187,23 @@ watch(dealDate, (v) => {
   min-height: 0;
 }
 
-/* —— 第一行（保持你现有比例） —— */
+/* —— 第一行 —— */
 .panel--gauge {
   flex: 0 1 28%;
   max-width: 480px;
   min-width: 280px;
-  height: min(42vh, 440px);
 }
 
 .panel--v {
   flex: 1 1 40%;
   min-width: 360px;
   max-width: 960px;
-  height: min(42vh, 440px);
 }
 
 .panel--cap {
   flex: 0 1 28%;
   max-width: 480px;
   min-width: 280px;
-  height: min(42vh, 440px);
 }
 
 /* —— 第二行占位 —— */
@@ -201,10 +211,9 @@ watch(dealDate, (v) => {
 .panel--diff {
   flex: 1 1 0;
   min-width: 0;
-  height: min(42vh, 440px);
 }
 
-/* 占位内容（以后换成业务组件即可） */
+/* 占位内容 */
 .panel-placeholder {
   height: 100%;
   min-height: 0;
@@ -243,6 +252,7 @@ watch(dealDate, (v) => {
 @media (max-width: 1400px) {
   .index-1__row {
     flex-wrap: wrap;
+    flex: 1 1 auto;
   }
 
   .panel--gauge,
