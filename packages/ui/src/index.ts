@@ -1,4 +1,4 @@
-// ============ 组件导出（只暴露 Ui* / Chart）============
+// ============ 组件导出 ============
 export { default as UiCard } from './components/Card/index.vue'
 export { default as UiForm } from './components/Form/index.vue'
 export { default as UiTable } from './components/Table/index.vue'
@@ -9,7 +9,7 @@ export { default as UiDatePicker } from './components/DatePicker/index.vue'
 export { default as UiFrameDialog } from './components/FrameDialog/index.vue'
 export { default as Chart } from './components/Chart/index.vue'
 export { UiMessage } from './message'
-// ============ 类型导出（自有类型，不 re-export element-plus）============
+// ============ 类型导出 ============
 export type { CardProps } from './components/Card/types'
 export type { FrameDialogProps } from './components/FrameDialog/types'
 export type { UiSelectOption, UiSelectProps } from './components/Select/types'

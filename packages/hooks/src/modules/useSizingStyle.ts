@@ -1,5 +1,5 @@
 /** 本地检测：用 mocks；真接口有数据后改回 sizingStyleApi */
-import { sizingStyleMockApi } from '@my-repo/apis'
+import { sizingStyleMockApi, type SizingStyleHistoryData } from '@my-repo/apis'
 import {
   CapCurveBarViewModel,
   CapPhaseViewModel,
@@ -12,6 +12,9 @@ import {
 import { ref } from 'vue'
 
 const MODE_KEY = 'sizing-style-mode'
+
+const past5Visible = ref(false)
+const past5Rows = ref<SizingStyleHistoryData>([])
 
 /**从 localStorage（key：sizing-style-mode）读上次选的形态。 刷新页面后还能回到用户上次选的形态。*/
 function readMode(): SizingStyleMode {
@@ -79,14 +82,28 @@ export function useSizingStyle() {
     setMode(((mode.value + 1) % 3) as SizingStyleMode)
   }
 
+  async function openPast5() {
+    past5Visible.value = true
+    try {
+      const rows = await sizingStyleMockApi.getIndexChangePercent()
+      past5Rows.value = Array.isArray(rows) ? rows : []
+    } catch (e) {
+      console.error('[SizingStyle] past5 failed', e)
+      past5Rows.value = []
+    }
+  }
+
   return {
     mode,
     data,
     phaseData,
     curveBarData,
     loading,
+    past5Visible,
+    past5Rows,
     setMode,
     toggleMode,
+    openPast5,
     refresh
   }
 }

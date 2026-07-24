@@ -31,7 +31,9 @@
             :phase-data="phaseData"
             :curve-bar-data="curveBarData"
             @toggle-mode="toggleCapMode"
+            @open-past5="openCapPast5"
           />
+          <CapStylePast5Dialog v-model="capPast5Visible" :data="capPast5Rows" />
         </div>
       </UiCard>
     </div>
@@ -76,7 +78,8 @@ import {
   MarketLevelGauge,
   VReverseProbability,
   VBackPast5Dialog,
-  CapStyleGauge
+  CapStyleGauge,
+  CapStylePast5Dialog
 } from '@my-repo/business'
 import { useMarketGauge, useSizingStyle, useVBackProb } from '@my-repo/hooks'
 import { registerScreenRefreshKey } from '../../composables/screenRefresh'
@@ -96,7 +99,10 @@ const {
   data: capData,
   phaseData,
   curveBarData,
+  past5Visible: capPast5Visible,
+  past5Rows: capPast5Rows,
   toggleMode: toggleCapMode,
+  openPast5: openCapPast5,
   refresh: refreshCap
 } = useSizingStyle()
 const {

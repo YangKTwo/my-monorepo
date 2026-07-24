@@ -12,6 +12,74 @@ const sizingStyleProbMock: SizingStyleProb = {
   smallStyleRatio: 37.65
 }
 
+const historyMock: SizingStyleHistoryData = [
+  {
+    date: '26-07-22',
+    dealDate: 20260722,
+    openExponentNameOne: '上证50',
+    openExponentNameTwo: '中证1000',
+    openChangePercentOne: -0.64,
+    openChangePercentTwo: -0.87,
+    openStyle: '大盘',
+    middleChangePercentOne: null as unknown as number, // 或把类型改成 number | null
+    middleChangePercentTwo: null as unknown as number,
+    middleStyle: '',
+    practicalStyle: ''
+  },
+  {
+    date: '26-07-21',
+    dealDate: 20260721,
+    openExponentNameOne: '上证50',
+    openExponentNameTwo: '中证1000',
+    openChangePercentOne: 1.38,
+    openChangePercentTwo: 0.15,
+    openStyle: '大盘',
+    middleChangePercentOne: 0.66,
+    middleChangePercentTwo: 3.01,
+    middleStyle: '大盘',
+    practicalStyle: '小盘'
+  },
+  {
+    date: '26-07-20',
+    dealDate: 20260720,
+    openExponentNameOne: '上证50',
+    openExponentNameTwo: '中证1000',
+    openChangePercentOne: 0.87,
+    openChangePercentTwo: 1.23,
+    openStyle: '大盘',
+    middleChangePercentOne: 2.41,
+    middleChangePercentTwo: -0.95,
+    middleStyle: '大盘',
+    practicalStyle: '大盘'
+  },
+  {
+    date: '26-07-17',
+    dealDate: 20260717,
+    openExponentNameOne: '上证50',
+    openExponentNameTwo: '中证1000',
+    openChangePercentOne: -0.59,
+    openChangePercentTwo: -0.42,
+    openStyle: '大盘',
+    middleChangePercentOne: -1.71,
+    middleChangePercentTwo: -3.14,
+    middleStyle: '大盘',
+    practicalStyle: '大盘'
+  },
+  {
+    date: '26-07-16',
+    dealDate: 20260716,
+    openExponentNameOne: '上证50',
+    openExponentNameTwo: '中证1000',
+    openChangePercentOne: -1.34,
+    openChangePercentTwo: -1.34,
+    openStyle: '大盘',
+    middleChangePercentOne: -0.99,
+    middleChangePercentTwo: -0.73,
+    middleStyle: '大盘',
+    practicalStyle: '大盘'
+  }
+]
+
 /** 生成当日分时扁平列表（mode1/mode2 共用） */
 export function createSizingStyleListMock(): SizingStyleItem[] {
   const total = 90
@@ -54,6 +122,6 @@ export const sizingStyleMockApi = {
   },
 
   getIndexChangePercent() {
-    return Promise.resolve([] as SizingStyleHistoryData)
+    return Promise.resolve(historyMock)
   }
 }

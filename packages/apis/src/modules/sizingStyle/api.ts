@@ -19,6 +19,7 @@ export const sizingStyleApi = {
     })
   },
 
+  /**过去五日 */
   getIndexChangePercent() {
     return httpClient.get<SizingStyleHistoryData>('/intelligence/sizingStyle/getIndexChangePercent')
   }
