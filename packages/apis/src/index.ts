@@ -11,6 +11,8 @@ export * from './modules/vBack'
 
 export * from './modules/sizingStyle'
 
+export * from './modules/divergence'
+
 /** 本地假接口：见 ./mocks（与 modules 真接口并列，接真后改 hook 的 import） */
 export * from './mocks'
 

@@ -8,6 +8,9 @@
     :format="format"
     :value-format="valueFormat"
     :placeholder="placeholder"
+    :start-placeholder="startPlaceholder"
+    :end-placeholder="endPlaceholder"
+    :range-separator="rangeSeparator"
     :disabled="disabled"
     :clearable="clearable"
     :size="size"
@@ -26,6 +29,9 @@ const props = withDefaults(defineProps<UiDatePickerProps>(), {
   format: 'YYYY-MM-DD',
   valueFormat: 'YYYY-MM-DD',
   placeholder: '选择日期',
+  startPlaceholder: '开始日期',
+  endPlaceholder: '结束日期',
+  rangeSeparator: '至',
   disabled: false,
   clearable: false,
   size: 'small',

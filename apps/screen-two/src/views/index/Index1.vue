@@ -43,14 +43,19 @@
       <!-- 背离信号：类似 V 反，先占宽卡 -->
       <UiCard variant="dashboard" class="panel panel--diverge" no-padding>
         <div class="panel__body">
-          <div class="panel-placeholder">
-            <header class="panel-placeholder__hd">
-              <h3 class="panel-placeholder__title">背离信号</h3>
-            </header>
-            <div class="panel-placeholder__chart">
-              <span class="panel-placeholder__tip">图表占位（折线/类 V 反）</span>
-            </div>
-          </div>
+          <DivergenceSignal
+            v-if="divergeView"
+            :data="divergeView"
+            :date-range="divergeDateRange"
+            :exponent-name="divergeExponentName"
+            :period="divergePeriod"
+            :exponent-options="divergeExponentOptions"
+            :active-signal-id="divergeActiveSignalId"
+            @update:date-range="divergeDateRange = $event"
+            @update:exponent-name="divergeExponentName = $event"
+            @update:period="divergePeriod = $event"
+            @update:active-signal-id="divergeActiveSignalId = $event"
+          />
         </div>
       </UiCard>
 
@@ -79,9 +84,10 @@ import {
   VReverseProbability,
   VBackPast5Dialog,
   CapStyleGauge,
-  CapStylePast5Dialog
+  CapStylePast5Dialog,
+  DivergenceSignal
 } from '@my-repo/business'
-import { useMarketGauge, useSizingStyle, useVBackProb } from '@my-repo/hooks'
+import { useDivergenceSignal, useMarketGauge, useSizingStyle, useVBackProb } from '@my-repo/hooks'
 import { registerScreenRefreshKey } from '../../composables/screenRefresh'
 
 function today() {
@@ -115,10 +121,21 @@ const {
   refresh: refreshVBack
 } = useVBackProb(dealDate)
 
+const {
+  dateRange: divergeDateRange,
+  exponentName: divergeExponentName,
+  period: divergePeriod,
+  exponentSelectOptions: divergeExponentOptions,
+  viewData: divergeView,
+  activeSignalId: divergeActiveSignalId,
+  loadExponents: loadDivergeExponents,
+  refresh: refreshDiverge
+} = useDivergenceSignal()
+
 let refreshTimer: ReturnType<typeof setInterval> | null = null
 
 async function fetchAll() {
-  await Promise.all([refreshGauge(), refreshVBack(), refreshCap()])
+  await Promise.all([refreshGauge(), refreshVBack(), refreshCap(), refreshDiverge()])
 }
 
 function onDealDateChange(date: string) {
@@ -141,6 +158,7 @@ function stopAutoRefresh() {
 
 onMounted(() => {
   registerScreenRefresh?.(fetchAll)
+  void loadDivergeExponents()
   void fetchAll()
   startAutoRefresh()
 })

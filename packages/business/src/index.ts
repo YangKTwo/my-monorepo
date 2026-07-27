@@ -8,6 +8,7 @@ export { default as VReverseProbability } from './components/VReverseProbability
 export { default as VBackPast5Dialog } from './components/VBackPast5Dialog/index.vue'
 export { default as CapStyleGauge } from './components/CapStyleGauge/index.vue'
 export { default as CapStylePast5Dialog } from './components/CapStylePast5Dialog/index.vue'
+export { default as DivergenceSignal } from './components/DivergenceSignal/index.vue'
 
 export {
   mapForecastToGauge,
@@ -25,6 +26,7 @@ export {
   mapSizingStyleListToPhase,
   mapSizingStyleListToCurveBar
 } from './components/CapStyleGauge/mapSizingStyle'
+export { mapDivergenceToView } from './components/DivergenceSignal/mapDivergence'
 
 export type { ScreenNavItem } from './components/ScreenPrimaryNav/types.ts'
 export type { ScreenToolItem } from './components/ScreenToolbar/types'
@@ -47,3 +49,4 @@ export type {
   SizingStyleMode
 } from './components/CapStyleGauge/types'
 export type { CapStylePast5DialogProps } from './components/CapStylePast5Dialog/types'
+export type { DivergenceSignalViewModel } from './components/DivergenceSignal/types'
