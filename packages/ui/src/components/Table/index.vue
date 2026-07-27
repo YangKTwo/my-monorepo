@@ -1,313 +1,142 @@
 <template>
-  <div class="ui-table">
-    <table class="ui-table__inner" :class="{ 'is-bordered': border, 'is-striped': stripe }">
-      <thead>
-        <tr>
-          <th v-if="showIndex" class="ui-table__cell" style="width: 60px; text-align: center">
-            序号
-          </th>
-          <th
-            v-for="col in columns"
-            :key="col.key"
-            class="ui-table__cell"
-            :style="{
-              width: col.width ? col.width + 'px' : 'auto',
-              textAlign: col.align || 'left'
-            }"
-            @click="col.sortable && handleSort(col)"
-          >
-            {{ col.label }}
-            <span v-if="col.sortable" class="ui-table__sort">
-              <span
-                class="sort-arrow"
-                :class="{ active: sortKey === col.key && sortOrder === 'asc' }"
-                >▲</span
-              >
-              <span
-                class="sort-arrow"
-                :class="{ active: sortKey === col.key && sortOrder === 'desc' }"
-                >▼</span
-              >
-            </span>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(row, index) in data"
-          :key="row.id || index"
-          class="ui-table__row"
-          @click="handleRowClick(row)"
+  <el-table
+    class="ui-table"
+    :class="[`ui-table--${variant}`]"
+    :data="data"
+    :size="size"
+    :height="height"
+    :empty-text="emptyText"
+    :border="border"
+    :stripe="stripe"
+    :row-key="rowKey"
+    @selection-change="onSelectionChange"
+    @sort-change="onSortChange"
+  >
+    <template v-for="col in columns" :key="col.key">
+      <!-- 多级表头 -->
+      <el-table-column
+        v-if="col.children?.length"
+        :label="col.label"
+        :align="col.align || 'center'"
+      >
+        <el-table-column
+          v-for="child in col.children"
+          :key="child.key"
+          :prop="child.prop || child.key"
+          :label="child.label"
+          :min-width="child.minWidth"
+          :width="child.width"
+          :align="child.align || 'center'"
         >
-          <td v-if="showIndex" class="ui-table__cell" style="text-align: center">
-            {{ (currentPage - 1) * pageSize + index + 1 }}
-          </td>
-          <td
-            v-for="col in columns"
-            :key="col.key"
-            class="ui-table__cell"
-            :style="{ textAlign: col.align || 'left' }"
-          >
-            <!-- 如果有插槽，使用插槽 -->
-            <slot :name="col.key" :row="row" :index="index">
-              {{ row[col.key] }}
+          <template #default="scope">
+            <slot :name="child.key" v-bind="scope">
+              {{ scope.row[child.prop || child.key] }}
             </slot>
-          </td>
-        </tr>
-        <tr v-if="!data || data.length === 0">
-          <td :colspan="columns.length + (showIndex ? 1 : 0)" class="ui-table__empty">暂无数据</td>
-        </tr>
-      </tbody>
-    </table>
+          </template>
+        </el-table-column>
+      </el-table-column>
 
-    <!-- 分页 -->
-    <div v-if="showPagination" class="ui-table__pagination">
-      <span class="ui-table__total">共 {{ total }} 条</span>
-      <div class="ui-table__pagination-controls">
-        <button
-          class="ui-table__page-btn"
-          :disabled="currentPage <= 1"
-          @click="handlePageChange(currentPage - 1)"
-        >
-          上一页
-        </button>
-        <span class="ui-table__page-info"> 第 {{ currentPage }} / {{ totalPages }} 页 </span>
-        <button
-          class="ui-table__page-btn"
-          :disabled="currentPage >= totalPages"
-          @click="handlePageChange(currentPage + 1)"
-        >
-          下一页
-        </button>
-        <select
-          class="ui-table__page-size"
-          :value="pageSize"
-          @change="handleSizeChange(Number($event.target.value))"
-        >
-          <option v-for="size in pageSizes" :key="size" :value="size">{{ size }} 条/页</option>
-        </select>
-      </div>
-    </div>
-  </div>
+      <!-- 普通列 -->
+      <el-table-column
+        v-else
+        :prop="col.prop || col.key"
+        :label="col.label"
+        :min-width="col.minWidth"
+        :width="col.width"
+        :align="col.align || 'left'"
+        :fixed="col.fixed"
+        :sortable="col.sortable"
+      >
+        <template #default="scope">
+          <slot :name="col.key" v-bind="scope">
+            {{ scope.row[col.prop || col.key] }}
+          </slot>
+        </template>
+      </el-table-column>
+    </template>
+  </el-table>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import type { TableColumn, SortBy } from './types'
+import type { SortBy, UiTableProps } from './types'
 
-interface Props {
-  data: any[]
-  columns: TableColumn[]
-  loading?: boolean
-  total?: number
-  currentPage?: number
-  pageSize?: number
-  pageSizes?: number[]
-  showPagination?: boolean
-  showIndex?: boolean
-  border?: boolean
-  stripe?: boolean
-  height?: string | number
-}
-
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<UiTableProps>(), {
   data: () => [],
   columns: () => [],
-  loading: false,
-  total: 0,
-  currentPage: 1,
-  pageSize: 10,
-  pageSizes: () => [10, 20, 50, 100],
-  showPagination: true,
-  showIndex: false,
-  border: true,
-  stripe: true,
-  height: 'auto'
+  size: 'default',
+  emptyText: '暂无数据',
+  border: false,
+  stripe: false,
+  variant: 'default',
+  selected: () => [],
+  rowKey: 'id'
 })
 
 const emit = defineEmits<{
-  (e: 'update:currentPage', value: number): void
-  (e: 'update:pageSize', value: number): void
-  (e: 'update:sort', value: SortBy | null): void
-  (e: 'row-click', row: any): void
-  (e: 'page-change', page: number): void
-  (e: 'size-change', size: number): void
+  'update:selected': [rows: Record<string, any>[]]
+  'update:sort': [value: SortBy | null]
+  'selection-change': [rows: Record<string, any>[]]
+  'sort-change': [payload: { prop: string; order: 'ascending' | 'descending' | null }]
 }>()
 
-const sortKey = ref<string>('')
-const sortOrder = ref<'asc' | 'desc' | ''>('')
+function onSelectionChange(rows: Record<string, any>[]) {
+  emit('update:selected', rows)
+  emit('selection-change', rows)
+}
 
-const totalPages = computed(() => {
-  return Math.ceil((props.total || 0) / props.pageSize)
-})
-
-const handleSort = (col: TableColumn) => {
-  if (!col.sortable) return
-
-  if (sortKey.value === col.key) {
-    if (sortOrder.value === 'asc') {
-      sortOrder.value = 'desc'
-    } else if (sortOrder.value === 'desc') {
-      sortOrder.value = ''
-      sortKey.value = ''
-    } else {
-      sortOrder.value = 'asc'
-    }
-  } else {
-    sortKey.value = col.key
-    sortOrder.value = 'asc'
-  }
-
-  if (sortKey.value && sortOrder.value) {
-    emit('update:sort', {
-      key: sortKey.value,
-      order: sortOrder.value
-    })
-  } else {
+function onSortChange(payload: { prop: string; order: 'ascending' | 'descending' | null }) {
+  emit('sort-change', payload)
+  if (!payload.prop || !payload.order) {
     emit('update:sort', null)
+    return
   }
+  emit('update:sort', {
+    key: payload.prop,
+    order: payload.order === 'ascending' ? 'asc' : 'desc'
+  })
 }
-
-const handleRowClick = (row: any) => {
-  emit('row-click', row)
-}
-
-const handlePageChange = (page: number) => {
-  if (page >= 1 && page <= totalPages.value) {
-    emit('update:currentPage', page)
-    emit('page-change', page)
-  }
-}
-
-const handleSizeChange = (size: number) => {
-  emit('update:pageSize', size)
-  emit('size-change', size)
-  // 重置到第一页
-  emit('update:currentPage', 1)
-  emit('page-change', 1)
-}
-
-// 引入 ref
-import { ref } from 'vue'
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .ui-table {
   width: 100%;
-  overflow: hidden;
 }
 
-.ui-table__inner {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
+.ui-table--dashboard {
+  background: transparent !important;
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: transparent;
+  --el-table-row-hover-bg-color: rgba(157, 255, 254, 0.08);
+  --el-table-border-color: rgba(157, 255, 254, 0.28);
+  --el-table-text-color: rgba(229, 234, 240, 0.92);
+  --el-table-header-text-color: #9dfffe;
+  --el-fill-color-blank: transparent;
 
-.ui-table__inner.is-bordered {
-  border: 1px solid #e5e7eb;
-}
+  &::before,
+  &::after {
+    display: none !important;
+  }
 
-.ui-table__inner.is-bordered .ui-table__cell {
-  border: 1px solid #e5e7eb;
-}
+  :deep(.el-table__inner-wrapper::before) {
+    display: none !important;
+  }
 
-.ui-table__inner.is-striped .ui-table__row:nth-child(even) {
-  background: #f9fafb;
-}
+  :deep(.el-table__header-wrapper th.el-table__cell) {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(157, 255, 254, 0.35) !important;
+    font-weight: 600;
+    font-size: 12px;
+  }
 
-.ui-table__cell {
-  padding: 10px 14px;
-  text-align: left;
-  color: #333;
-}
+  :deep(.el-table__body-wrapper td.el-table__cell) {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(157, 255, 254, 0.12) !important;
+    font-size: 12px;
+  }
 
-.ui-table__row {
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.ui-table__row:hover {
-  background: #f3f4f6;
-}
-
-.ui-table__sort {
-  display: inline-flex;
-  flex-direction: column;
-  margin-left: 4px;
-  font-size: 10px;
-  cursor: pointer;
-}
-
-.sort-arrow {
-  color: #ccc;
-  line-height: 1;
-}
-
-.sort-arrow.active {
-  color: #4a9eff;
-}
-
-.ui-table__empty {
-  text-align: center;
-  padding: 30px 0;
-  color: #999;
-}
-
-.ui-table__pagination {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 16px;
-  padding: 0 4px;
-}
-
-.ui-table__total {
-  color: #666;
-  font-size: 13px;
-}
-
-.ui-table__pagination-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ui-table__page-btn {
-  padding: 4px 12px;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  background: #fff;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s;
-}
-
-.ui-table__page-btn:hover:not(:disabled) {
-  background: #4a9eff;
-  color: #fff;
-  border-color: #4a9eff;
-}
-
-.ui-table__page-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.ui-table__page-info {
-  color: #333;
-  font-size: 13px;
-}
-
-.ui-table__page-size {
-  padding: 4px 8px;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  font-size: 13px;
-  outline: none;
-  cursor: pointer;
-}
-
-.ui-table__page-size:focus {
-  border-color: #4a9eff;
+  :deep(.el-table__empty-text) {
+    color: rgba(229, 234, 240, 0.55);
+  }
 }
 </style>

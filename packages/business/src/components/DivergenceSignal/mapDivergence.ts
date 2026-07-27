@@ -12,7 +12,6 @@ function pad(n: number) {
 /**把信号时间统一成毫秒 */
 function toMs(v: string | number): number {
   if (typeof v === 'number') return v
-  // "2025-03-27 09:49:00" → 可被 Date 解析
   return new Date(v.replace(/-/g, '/')).getTime()
 }
 

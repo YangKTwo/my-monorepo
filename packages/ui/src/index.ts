@@ -24,7 +24,7 @@ export type {
   FormActionText,
   FormItemType
 } from './components/Form/types'
-export type { TableColumn, SortBy } from './components/Table/types'
+export type { TableColumn, SortBy, UiTableProps } from './components/Table/types'
 export type { ChartOption, ChartProps, ChartExpose } from './components/Chart/types'
 
 // ============ 样式 ============
